@@ -1,6 +1,6 @@
-# MoneySpy
+# MoneySleuth
 
-A simple tool to allow importing transactions from multiple banks across different countries and categorise them to track spending.
+A simple tool to allow importing statements from multiple banks across different countries and then categorise transactions to track spending.
 
 ### Prerequisites
 

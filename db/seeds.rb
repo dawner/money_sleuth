@@ -3,11 +3,16 @@
 #
 # Examples:
 #
+# Create some multi country example banks
 Bank.create([
-  { slug: 'anz', name: 'ANZ' },
-  { slug: 'kiwibank', name: 'Kiwibank' }
+  { slug: 'tangerine', name: 'Tangerine', currency: :cad },
+  { slug: 'cibc', name: 'CIBC', currency: :cad },
+  { slug: 'td', name: 'TD', currency: :cad },
+  { slug: 'anz', name: 'ANZ', currency: :nzd },
+  { slug: 'kiwibank', name: 'Kiwibank', currency: :nzd }
 ])
 
+# Create basic categories
 Category.create([
   {name: 'Rent', keywords: []},
   { name: 'Utilities', keywords: []},
