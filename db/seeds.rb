@@ -8,7 +8,7 @@ Bank.create([
   { slug: 'kiwibank', name: 'Kiwibank' }
 ])
 
-Category.create(
+Category.create([
   {name: 'Rent', keywords: []},
   { name: 'Utilities', keywords: []},
   { name: 'Groceries', keywords: []},
