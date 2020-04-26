@@ -1,0 +1,27 @@
+<%= form_with(model: transaction_batch, local: true) do |form| %>
+  <% if transaction_batch.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(transaction_batch.errors.count, "error") %> prohibited this transaction_batch from being saved:</h2>
+
+      <ul>
+        <% transaction_batch.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :upload_ref %>
+    <%= form.text_field :upload_ref %>
+  </div>
+
+  <div class="field">
+    <%= form.label :bank_id %>
+    <%= form.text_field :bank_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

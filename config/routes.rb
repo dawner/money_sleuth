@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :transaction_batches
   resources :transactions
   resources :categories
   resources :banks

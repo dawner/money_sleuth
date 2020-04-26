@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Upload ref:</strong>
+  <%= @transaction_batch.upload_ref %>
+</p>
+
+<p>
+  <strong>Bank:</strong>
+  <%= @transaction_batch.bank_id %>
+</p>
+
+<%= link_to 'Edit', edit_transaction_batch_path(@transaction_batch) %> |
+<%= link_to 'Back', transaction_batches_path %>

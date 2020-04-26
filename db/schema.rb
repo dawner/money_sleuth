@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_26_002007) do
+ActiveRecord::Schema.define(version: 2020_04_26_222828) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,21 +30,29 @@ ActiveRecord::Schema.define(version: 2020_04_26_002007) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "transaction_batches", force: :cascade do |t|
+    t.bigint "bank_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "upload_ref"
+    t.index ["bank_id"], name: "index_transaction_batches_on_bank_id"
+  end
+
   create_table "transactions", force: :cascade do |t|
     t.date "posted_on", null: false
     t.integer "value_cents", default: 0, null: false
-    t.string "value_currency", default: "USD", null: false
+    t.string "value_currency", default: "CAD", null: false
     t.text "description"
-    t.integer "status"
-    t.string "upload_ref"
-    t.bigint "bank_id", null: false
+    t.integer "status", default: 0, null: false
     t.bigint "category_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["bank_id"], name: "index_transactions_on_bank_id"
+    t.bigint "transaction_batch_id"
     t.index ["category_id"], name: "index_transactions_on_category_id"
+    t.index ["transaction_batch_id"], name: "index_transactions_on_transaction_batch_id"
   end
 
-  add_foreign_key "transactions", "banks"
+  add_foreign_key "transaction_batches", "banks"
   add_foreign_key "transactions", "categories"
+  add_foreign_key "transactions", "transaction_batches"
 end
