@@ -3,5 +3,33 @@
 #
 # Examples:
 #
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+Bank.create([
+  { slug: 'anz', name: 'ANZ' },
+  { slug: 'kiwibank', name: 'Kiwibank' }
+])
+
+Category.create(
+  {name: 'Rent', keywords: []},
+  { name: 'Utilities', keywords: []},
+  { name: 'Groceries', keywords: []},
+  { name: 'Transport', keywords: []},
+  {
+    name: 'Health',
+    keywords: ['health', 'dental']
+  },
+  { name: 'Personal care', keywords: []},
+  { name: 'Clothing/gear', keywords: []},
+  {
+    name: 'Dining out',
+    keywords: ['cafe', 'coffee', 'beer', 'burger']
+  },
+  { name: 'Entertainment', keywords: []},
+  { name: 'Travel', keywords: []},
+  { name: 'Business expenses', keywords: []},
+  {
+    name: 'Gifts/Donations',
+    keywords: ['foundation']
+  },
+  { name: 'Miscellaneous', keywords: []},
+  { name: 'Saving', keywords: []}
+])

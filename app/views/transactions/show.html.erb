@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Posted on:</strong>
+  <%= @transaction.posted_on %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @transaction.description %>
+</p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @transaction.amount %>
+</p>
+
+<p>
+  <strong>State:</strong>
+  <%= @transaction.state %>
+</p>
+
+<p>
+  <strong>Upload ref:</strong>
+  <%= @transaction.upload_ref %>
+</p>
+
+<p>
+  <strong>Bank:</strong>
+  <%= @transaction.bank_id %>
+</p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @transaction.category_id %>
+</p>
+
+<%= link_to 'Edit', edit_transaction_path(@transaction) %> |
+<%= link_to 'Back', transactions_path %>
