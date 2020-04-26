@@ -1,24 +1,25 @@
-# README
+# MoneySpy
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A simple tool to allow importing transactions from multiple banks across different countries and categorise them to track spending.
 
-Things you may want to cover:
+### Prerequisites
 
-* Ruby version
+- Ruby 2.7.1
+- Rails 6.0.2
 
-* System dependencies
+### Installation
 
-* Configuration
+1. Check out the repository
+   `git clone git@github.com/dawner/moneyspy.git`
 
-* Database creation
+2. Create and setup the database
 
-* Database initialization
+```
+bundle exec rake db:create
+bundle exec rake db:setup
+```
 
-* How to run the test suite
+4. Start the Rails server
+   `bundle exec rails s`
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+You can now visit the site with the URL http://localhost:3000
