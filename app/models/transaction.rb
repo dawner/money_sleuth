@@ -4,5 +4,7 @@ class Transaction < ApplicationRecord
   belongs_to :transaction_batch
   belongs_to :category
 
-  monetize :value
+  monetize :value_cents
+
+  validates_presence_of :posted_on, :category, :transaction_batch
 end

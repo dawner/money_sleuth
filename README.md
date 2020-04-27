@@ -10,7 +10,7 @@ A simple tool to allow importing statements from multiple banks across different
 ### Installation
 
 1. Check out the repository
-   `git clone git@github.com/dawner/moneyspy.git`
+   `git clone git@github.com/dawner/money_sleuth.git`
 
 2. Create and setup the database
 

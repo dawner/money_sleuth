@@ -14,8 +14,7 @@
   <tbody>
     <% @transaction_batches.each do |transaction_batch| %>
       <tr>
-        <td><%= transaction_batch.upload_ref %></td>
-        <td><%= transaction_batch.bank_id %></td>
+        <td><%= transaction_batch.bank.name %></td>
         <td><%= link_to 'Show', transaction_batch %></td>
         <td><%= link_to 'Edit', edit_transaction_batch_path(transaction_batch) %></td>
         <td><%= link_to 'Destroy', transaction_batch, method: :delete, data: { confirm: 'Are you sure?' } %></td>
