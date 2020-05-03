@@ -34,6 +34,8 @@ gem 'money-rails', '~>1.12'
 gem 'carrierwave', '~> 2.0'
 # More efficient CSV processing
 gem 'smarter_csv'
+# Simple service object handling
+gem "interactor", "~> 3.0"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
