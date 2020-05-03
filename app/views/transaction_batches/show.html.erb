@@ -1,13 +1,33 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>File:</strong>
-  <%= @transaction_batch.bank_file %>
-</p>
+
 
 <p>
   <strong>Bank:</strong>
-  <%= @transaction_batch.bank_id %>
+  <%= @transaction_batch.bank.name %>
+</p>
+
+<table>
+  <tr>
+    <th>Date</th>
+    <th>Amount</th>
+    <th>Category</th>
+    <th>Description</th>
+  </tr>
+
+  <% @transaction_batch.transactions.each do |transaction| %>
+      <tr>
+        <td><%= l(transaction.posted_on) %></td>
+        <td><%= transaction.value.format %></td>
+        <td><%= transaction.category.name %></td>
+        <td><%= transaction.description %></td>
+      </tr>
+  <% end %>
+</table>
+
+<p>
+  <strong>File:</strong>
+  <%= @transaction_batch.bank_file %>
 </p>
 
 <%= link_to 'Edit', edit_transaction_batch_path(@transaction_batch) %> |

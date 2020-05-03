@@ -11,16 +11,14 @@
     </div>
   <% end %>
 
+  <%= form.collection_select :bank_id, Bank.all, :id, :name %>
+
   <div class="field">
     <%= form.label :bank_file %>
     <%= form.file_field :bank_file %>
     <%= form.hidden_field :bank_file_cache %>
   </div>
 
-  <div class="field">
-    <%= form.label :bank_id %>
-    <%= form.text_field :bank_id %>
-  </div>
 
   <div class="actions">
     <%= form.submit %>
