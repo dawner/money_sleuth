@@ -1,5 +1,5 @@
 {
-  "name": "moneyspy",
+  "name": "money_sleuth",
   "private": true,
   "dependencies": {
     "@rails/actioncable": "^6.0.0",
