@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Expenses</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Category</th>
+      <th>Percentage</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @expenses.each do |category, value| %>
+      <tr>
+        <td><%= category.name %></td>
+        <td><%= format_percent(value, @total) %>%</td>
+        <td><%= value.format %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
