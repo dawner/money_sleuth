@@ -15,11 +15,15 @@
     <th>Description</th>
   </tr>
 
-  <% @transaction_batch.transactions.each do |transaction| %>
+  <% @transaction_batch.transactions.order(:posted_on).each do |transaction| %>
       <tr>
         <td><%= l(transaction.posted_on) %></td>
         <td><%= transaction.value.format %></td>
-        <td><%= transaction.category.name %></td>
+        <td>
+          <%= form_for transaction do |f| %>
+            <%= f.collection_select :category_id, Category.all.order(:name), :id, :name, {}, onchange: "this.form.submit();" %>
+          <% end %>
+        </td>
         <td><%= transaction.description %></td>
       </tr>
   <% end %>
