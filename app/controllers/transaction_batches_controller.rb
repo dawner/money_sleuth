@@ -17,10 +17,6 @@ class TransactionBatchesController < ApplicationController
     @transaction_batch = TransactionBatch.new
   end
 
-  # GET /transaction_batches/1/edit
-  def edit
-  end
-
   # POST /transaction_batches
   # POST /transaction_batches.json
   def create
@@ -34,21 +30,6 @@ class TransactionBatchesController < ApplicationController
       else
         format.html { render :new }
         format.json { render json: result.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /transaction_batches/1
-  # PATCH/PUT /transaction_batches/1.json
-  def update
-    # TODO rerun categorizer if bank headers changing
-    respond_to do |format|
-      if @transaction_batch.update(transaction_batch_update_params)
-        format.html { redirect_to @transaction_batch, notice: 'Transaction batch was successfully updated.' }
-        format.json { render :show, status: :ok, location: @transaction_batch }
-      else
-        format.html { render :edit }
-        format.json { render json: @transaction_batch.errors, status: :unprocessable_entity }
       end
     end
   end

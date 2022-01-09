@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   # Core CRUD data models
   resources :transactions
-  resources :transaction_batches
+  resources :transaction_batches, except: [:edit, :update]
   resources :categories
   resources :banks
 
