@@ -21,10 +21,16 @@
     <% end %>
   </tbody>
 </table>
-
+<br>
+<strong><%= link_to 'Upload new transactions', new_transaction_batch_path %></strong>
+<h5>View:</h5>
 <ul>
   <li><%= link_to 'Transactions', transactions_path %></li>
   <li><%= link_to 'Transaction Batches', transaction_batches_path %></li>
+</ul>
+
+<h5>Configure:</h5>
+<ul>
   <li><%= link_to 'Banks', banks_path %></li>
   <li><%= link_to 'Categories', categories_path %></li>
 </ul>

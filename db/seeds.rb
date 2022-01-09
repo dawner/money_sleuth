@@ -20,21 +20,20 @@ Category.create([
   { name: 'Transport', keywords: ['compass'] },
   {
     name: 'Health',
-    keywords: ['health', 'dental']
+    keywords: ['health', 'dental', 'doctor']
   },
-  { name: 'Hobbies', keywords: [] },
+  { name: 'Hobbies & Entertainment', keywords: [] },
   { name: 'Shopping', keywords: [] },
   {
     name: 'Dining out',
-    keywords: ['cafe', 'coffee', 'beer', 'burger']
+    keywords: ['cafe', 'coffee', 'beer', 'burger', 'brewing']
   },
-  { name: 'Entertainment', keywords: [] },
-  { name: 'Travel', keywords: [] },
+  { name: 'Vacation', keywords: [] },
   {
     name: 'Gifts/Donations',
     keywords: ['foundation']
   },
-  { name: 'Transfers', keywords: [] },
+  { name: 'Transfers', keywords: ['payment'] },
   { name: 'Miscellaneous', keywords: [] },
   { name: 'Employment', transaction_type: :income, keywords: [] },
   { name: 'Interest & Dividends', transaction_type: :income, keywords: [] },
