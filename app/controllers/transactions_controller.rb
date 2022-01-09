@@ -1,28 +1,35 @@
 class TransactionsController < ApplicationController
   before_action :set_transaction, only: [:update, :destroy]
 
+  # GET /transactions
+  # GET /transactions.json
+  def index
+    @transactions = Transaction.all
+  end
 
-  # PATCH/PUT /transactiones/1
-  # PATCH/PUT /transactiones/1.json
+  # PATCH/PUT /transactions/1
+  # PATCH/PUT /transactions/1.json
   def update
     # TODO rerun categorizer if bank headers changing
     respond_to do |format|
       if @transaction.update(transaction_update_params)
+        format.js { render json: nil, status: :ok }
         format.html { redirect_to @transaction, notice: 'Transaction was successfully updated.' }
         format.json { render :show, status: :ok, location: @transaction }
       else
+        format.js { render json: nil, status: :unprocessable_entity }
         format.html { render :edit }
         format.json { render json: @transaction.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # DELETE /transactiones/1
-  # DELETE /transactiones/1.json
+  # DELETE /transactions/1
+  # DELETE /transactions/1.json
   def destroy
     @transaction.destroy
     respond_to do |format|
-      format.html { redirect_to transactiones_url, notice: 'Transaction was successfully destroyed.' }
+      format.html { redirect_to transactions_url, notice: 'Transaction was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

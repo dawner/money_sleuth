@@ -1,33 +1,13 @@
 <p id="notice"><%= notice %></p>
 
-
+<%= link_to 'Back', transaction_batches_path %>
 
 <p>
   <strong>Bank:</strong>
   <%= @transaction_batch.bank.name %>
 </p>
 
-<table>
-  <tr>
-    <th>Date</th>
-    <th>Amount</th>
-    <th>Category</th>
-    <th>Description</th>
-  </tr>
-
-  <% @transaction_batch.transactions.order(:posted_on).each do |transaction| %>
-      <tr>
-        <td><%= l(transaction.posted_on) %></td>
-        <td><%= transaction.value.format %></td>
-        <td>
-          <%= form_for transaction do |f| %>
-            <%= f.collection_select :category_id, Category.all.order(:name), :id, :name, {}, onchange: "this.form.submit();" %>
-          <% end %>
-        </td>
-        <td><%= transaction.description %></td>
-      </tr>
-  <% end %>
-</table>
+<%= render 'transactions/transactions_list', transactions: @transaction_batch.transactions %>
 
 <p>
   <strong>File:</strong>
@@ -35,4 +15,3 @@
 </p>
 
 <%= link_to 'Edit', edit_transaction_batch_path(@transaction_batch) %> |
-<%= link_to 'Back', transaction_batches_path %>
