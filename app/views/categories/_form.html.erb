@@ -18,10 +18,30 @@
 
   <div class="field">
     <%= form.label :keywords %>
-    <%= form.text_field :keywords %>
+    <input name="keyword-tags" value=<%= category.keywords.join(',') %>>
   </div>
 
   <div class="actions">
     <%= form.submit %>
   </div>
 <% end %>
+
+<script>
+  var tagInput = document.querySelector('input[name="keyword-tags"]');
+  var tagify = new Tagify(tagInput, {
+    originalInputValueFormat: valuesArr => valuesArr.map(item => item.value).join(',')
+  })
+
+  // Transform Tagify input format into an array input fields
+  var form = tagInput.form
+  form.addEventListener('submit', (event) => {
+    var tags = tagInput.value.split(',').map((val) => {
+      var i = document.createElement("input");
+      i.setAttribute('name', 'category[keywords][]');
+      i.setAttribute('value', val);
+      i.setAttribute('hidden', true);
+      form.appendChild(i)
+    });
+    tagInput.parentNode.removeChild(tagInput);
+  });
+</script>
