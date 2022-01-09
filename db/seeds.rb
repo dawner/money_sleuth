@@ -14,27 +14,28 @@ Bank.create([
 
 # Create basic categories
 Category.create([
-  {name: 'Rent', keywords: []},
-  { name: 'Utilities', keywords: []},
-  { name: 'Groceries', keywords: []},
-  { name: 'Transport', keywords: []},
+  { name: 'Housing', keywords: [] },
+  { name: 'Bills & Utilities', keywords: ['insurance', 'fortis', 'hydro', 'spotify', 'mobile']},
+  { name: 'Groceries', keywords: [] },
+  { name: 'Transport', keywords: ['compass'] },
   {
     name: 'Health',
     keywords: ['health', 'dental']
   },
-  { name: 'Personal care', keywords: []},
-  { name: 'Clothing/gear', keywords: []},
+  { name: 'Hobbies', keywords: [] },
+  { name: 'Shopping', keywords: [] },
   {
     name: 'Dining out',
     keywords: ['cafe', 'coffee', 'beer', 'burger']
   },
-  { name: 'Entertainment', keywords: []},
-  { name: 'Travel', keywords: []},
-  { name: 'Business expenses', keywords: []},
+  { name: 'Entertainment', keywords: [] },
+  { name: 'Travel', keywords: [] },
   {
     name: 'Gifts/Donations',
     keywords: ['foundation']
   },
-  { name: 'Miscellaneous', keywords: []},
-  { name: 'Saving', keywords: []}
+  { name: 'Transfers', keywords: [] },
+  { name: 'Miscellaneous', keywords: [] },
+  { name: 'Employment', transaction_type: :income, keywords: [] },
+  { name: 'Interest & Dividends', transaction_type: :income, keywords: [] },
 ])
