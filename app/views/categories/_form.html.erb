@@ -17,6 +17,17 @@
   </div>
 
   <div class="field">
+    <%= form.label :transaction_type %>
+
+    <% Category.transaction_types.keys.each do |transaction_type| %>
+      <%= form.label "transaction_type_#{transaction_type}".to_sym do %>
+        <%= form.radio_button :transaction_type, transaction_type %>
+        <%= transaction_type.humanize %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="field">
     <%= form.label :keywords %>
     <input name="keyword-tags" value=<%= category.keywords.join(',') %>>
   </div>
@@ -38,7 +49,7 @@
     var tags = tagInput.value.split(',').map((val) => {
       var i = document.createElement("input");
       i.setAttribute('name', 'category[keywords][]');
-      i.setAttribute('value', val);
+      i.setAttribute('value', val.toLowerCase());
       i.setAttribute('hidden', true);
       form.appendChild(i)
     });

@@ -33,8 +33,9 @@ Category.create([
     name: 'Gifts/Donations',
     keywords: ['foundation']
   },
-  { name: 'Transfers', keywords: ['payment'] },
+  { name: 'Transfers', transaction_type: :internal, keywords: ['payment'] },
   { name: 'Miscellaneous', keywords: [] },
   { name: 'Employment', transaction_type: :income, keywords: [] },
   { name: 'Interest & Dividends', transaction_type: :income, keywords: [] },
+  { name: 'Bonus Income', transaction_type: :income, keywords: [] },
 ])

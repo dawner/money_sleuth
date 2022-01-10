@@ -2,7 +2,8 @@ class ExpensesController < ApplicationController
 
   def index
     @expenses = {}
-    expense_sum = Transaction.where('value_cents < 0')
+    expense_sum = Transaction.joins(:category)
+      .where(category: { transaction_type: :expense })
       .group(:category)
       .sum(:value_cents)
       .reduce(0) do |sum, (category, value_cents)|

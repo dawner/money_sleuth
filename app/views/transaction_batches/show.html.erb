@@ -1,7 +1,5 @@
 <p id="notice"><%= notice %></p>
 
-<%= link_to 'Back', transaction_batches_path %>
-
 <p>
   <strong>Bank:</strong>
   <%= @transaction_batch.bank.name %>
@@ -13,3 +11,5 @@
   <strong>File:</strong>
   <%= @transaction_batch.bank_file %>
 </p>
+
+<%= link_to 'Back', transaction_batches_path %>
