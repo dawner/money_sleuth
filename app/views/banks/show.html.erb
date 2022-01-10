@@ -10,5 +10,25 @@
   <%= @bank.slug %>
 </p>
 
+<p>
+  <strong>Headers:</strong>
+  <%= @bank.headers %>
+</p>
+
+<p>
+  <strong>Headers included in file:</strong>
+  <%= @bank.headers_in_file %>
+</p>
+
+<p>
+  <strong>Expenses are negative:</strong>
+  <%= @bank.expenses_negative %>
+</p>
+
+<p>
+  <strong>Date format:</strong>
+  <%= @bank.date_format %>
+</p>
+
 <%= link_to 'Edit', edit_bank_path(@bank) %> |
 <%= link_to 'Back', banks_path %>
