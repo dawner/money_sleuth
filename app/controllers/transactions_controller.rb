@@ -5,6 +5,7 @@ class TransactionsController < ApplicationController
   # GET /transactions.json
   def index
     @transactions = Transaction.all
+    @transactions = @transactions.where(category_id: params[:category_id]) if params[:category_id]
   end
 
   # PATCH/PUT /transactions/1

@@ -1,18 +1,25 @@
 class ExpensesController < ApplicationController
 
   def index
-    @expenses = {}
-    expense_sum = Transaction.joins(:category)
-      .where(category: { transaction_type: :expense })
-      .group(:category)
-      .sum(:value_cents)
-      .reduce(0) do |sum, (category, value_cents)|
-        expense = -value_cents
-        @expenses[category] = Money.new(expense)
-        sum + expense
-      end
+    lines = Transaction.joins(:category)
+    expenses = lines.where(category: { transaction_type: :expense })
+    income = lines.where(category: { transaction_type: :income })
 
+    @expenses_categories, @expenses_sum = sum_list(expenses)
+    @income_categories, @income_sum = sum_list(income)
+  end
 
-    @total = Money.new(expense_sum)
+  private
+
+  def sum_list(transactions)
+    categories = {}
+    total = transactions.group(:category)
+    .sum(:value_cents)
+    .reduce(0) do |sum, (category, value_cents)|
+      categories[category] = Money.new(value_cents)
+      sum + value_cents
+    end
+
+    [categories, Money.new(total)]
   end
 end

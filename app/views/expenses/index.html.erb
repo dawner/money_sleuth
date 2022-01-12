@@ -12,15 +12,50 @@
   </thead>
 
   <tbody>
-    <% @expenses.each do |category, value| %>
+    <% @expenses_categories.each do |category, value| %>
+      <tr>
+        <td><%= link_to category.name, transactions_path(category_id: category.id) %></td>
+        <td><%= format_percent(value, @expenses_sum) %>%</td>
+        <td><%= (-value).format %></td>
+      </tr>
+    <% end %>
+    <tr>
+      <td><strong>Total</strong></td>
+      <td></td>
+      <td><strong><%= (-@expenses_sum).format %></strong></td>
+    </tr>
+  </tbody>
+</table>
+
+<h1>Income</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Category</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @income_categories.each do |category, value| %>
       <tr>
         <td><%= category.name %></td>
-        <td><%= format_percent(value, @total) %>%</td>
         <td><%= value.format %></td>
       </tr>
     <% end %>
+    <tr>
+      <td><strong>Total</strong></td>
+      <td><strong><%= -@income_sum.format %></strong></td>
+    </tr>
   </tbody>
 </table>
+
+<h1>Savings</h1>
+<p><%= (@income_sum - -@expenses_sum).format %> (<%= (((@income_sum - -@expenses_sum)/@income_sum)*100).round %>%)
+<br>
+<br>
+
 <br>
 <strong><%= link_to 'Upload new transactions', new_transaction_batch_path %></strong>
 <h5>View:</h5>
