@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_09_498209) do
+ActiveRecord::Schema.define(version: 2022_01_12_045749) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "balance_entries", force: :cascade do |t|
+    t.date "posted_on"
+    t.integer "value_cents", default: 0, null: false
+    t.string "value_currency", default: "CAD", null: false
+    t.bigint "bank_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["bank_id"], name: "index_balance_entries_on_bank_id"
+  end
 
   create_table "banks", force: :cascade do |t|
     t.string "slug", null: false
@@ -58,6 +68,7 @@ ActiveRecord::Schema.define(version: 2022_01_09_498209) do
     t.index ["transaction_batch_id"], name: "index_transactions_on_transaction_batch_id"
   end
 
+  add_foreign_key "balance_entries", "banks"
   add_foreign_key "transaction_batches", "banks"
   add_foreign_key "transactions", "categories"
   add_foreign_key "transactions", "transaction_batches"

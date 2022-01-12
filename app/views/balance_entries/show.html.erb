@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Posted on:</strong>
+  <%= @balance_entry.posted_on %>
+</p>
+
+<p>
+  <strong>Value:</strong>
+  <%= @balance_entry.value.format %>
+</p>
+
+<p>
+  <strong>Bank:</strong>
+  <%= @balance_entry.bank.name %>
+</p>
+
+<%= link_to 'Edit', edit_balance_entry_path(@balance_entry) %> |
+<%= link_to 'Back', balance_entries_path %>
