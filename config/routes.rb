@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :transaction_batches, except: [:edit, :update]
   resources :categories
   resources :institutions
+  resources :accounts
   resources :balance_entries
 
   # Summaries
