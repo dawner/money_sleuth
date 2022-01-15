@@ -5,11 +5,11 @@ RSpec.describe "balance_entries/index", type: :view do
     assign(:balance_entries, [
       BalanceEntry.create!(
         value: "",
-        bank: nil
+        institution: nil
       ),
       BalanceEntry.create!(
         value: "",
-        bank: nil
+        institution: nil
       )
     ])
   end

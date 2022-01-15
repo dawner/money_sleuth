@@ -1,8 +1,8 @@
 class TransactionBatch < ApplicationRecord
-  belongs_to :bank
+  belongs_to :institution
   has_many :transactions, dependent: :destroy
 
-  mount_uploader :bank_file, BankFileUploader
+  mount_uploader :file, InstitutionFileUploader
 
-  validates_presence_of :bank, :bank_file
+  validates_presence_of :institution, :institution_file
 end

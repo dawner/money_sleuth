@@ -11,7 +11,7 @@ class TransactionsController < ApplicationController
   # PATCH/PUT /transactions/1
   # PATCH/PUT /transactions/1.json
   def update
-    # TODO rerun categorizer if bank headers changing
+    # TODO rerun categorizer if institution headers changing
     respond_to do |format|
       if @transaction.update(transaction_update_params)
         format.js { render json: nil, status: :ok }

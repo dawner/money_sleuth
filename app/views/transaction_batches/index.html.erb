@@ -7,7 +7,7 @@
   <thead>
     <tr>
       <th>Upload ref</th>
-      <th>Bank</th>
+      <th>Institution</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -15,8 +15,8 @@
   <tbody>
     <% @transaction_batches.each do |transaction_batch| %>
       <tr>
-        <td><%= transaction_batch.bank_file %></td>
-        <td><%= transaction_batch.bank.name %></td>
+        <td><%= transaction_batch.institution_file %></td>
+        <td><%= transaction_batch.institution.name %></td>
         <td><%= link_to 'Show', transaction_batch %></td>
         <td><%= link_to 'Destroy', transaction_batch, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

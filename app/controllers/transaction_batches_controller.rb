@@ -52,9 +52,9 @@ class TransactionBatchesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def transaction_batch_create_params
-      params.require(:transaction_batch).permit(:bank_file, :bank_file_cache, :bank_id)
+      params.require(:transaction_batch).permit(:institution_file, :institution_file_cache, :institution_id)
     end
     def transaction_batch_update_params
-      params.require(:transaction_batch).permit(:bank_id)
+      params.require(:transaction_batch).permit(:institution_id)
     end
 end

@@ -1,4 +1,4 @@
-class Bank < ApplicationRecord
+class Institution < ApplicationRecord
   has_many :transaction_batches, dependent: :destroy
   has_many :balance_entries, dependent: :destroy
 

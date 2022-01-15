@@ -4,7 +4,7 @@ RSpec.describe "balance_entries/edit", type: :view do
   before(:each) do
     @balance_entry = assign(:balance_entry, BalanceEntry.create!(
       value: "",
-      bank: nil
+      institution: nil
     ))
   end
 
@@ -15,7 +15,7 @@ RSpec.describe "balance_entries/edit", type: :view do
 
       assert_select "input[name=?]", "balance_entry[value]"
 
-      assert_select "input[name=?]", "balance_entry[bank_id]"
+      assert_select "input[name=?]", "balance_entry[institution_id]"
     end
   end
 end

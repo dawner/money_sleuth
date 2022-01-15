@@ -6,7 +6,7 @@
   <thead>
     <tr>
       <th>Posted on</th>
-      <th>Bank</th>
+      <th>Institution</th>
       <th>Value</th>
       <th colspan="3"></th>
     </tr>
@@ -16,7 +16,7 @@
     <% @balance_entries.each do |balance_entry| %>
       <tr>
         <td><%= balance_entry.posted_on %></td>
-        <td><%= balance_entry.bank.name %></td>
+        <td><%= balance_entry.institution.name %></td>
         <td><%= balance_entry.value.format %></td>
         <td><%= link_to 'Show', balance_entry %></td>
         <td><%= link_to 'Edit', edit_balance_entry_path(balance_entry) %></td>

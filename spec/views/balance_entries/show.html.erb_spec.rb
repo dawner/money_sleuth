@@ -4,7 +4,7 @@ RSpec.describe "balance_entries/show", type: :view do
   before(:each) do
     @balance_entry = assign(:balance_entry, BalanceEntry.create!(
       value: "",
-      bank: nil
+      institution: nil
     ))
   end
 

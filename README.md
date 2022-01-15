@@ -1,6 +1,6 @@
 # MoneySleuth
 
-A simple tool to allow importing statements from multiple banks across different countries and then categorise transactions to track spending.
+A simple tool for managing income, expenses & balances across multiple countries. Includes customizable support for importing statements institutions and categorise transactions to generate reports.
 
 ### Prerequisites
 

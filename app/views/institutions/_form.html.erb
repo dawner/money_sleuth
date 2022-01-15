@@ -1,10 +1,10 @@
-<%= form_with(model: bank, local: true) do |form| %>
-  <% if bank.errors.any? %>
+<%= form_with(model: institution, local: true) do |form| %>
+  <% if institution.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(bank.errors.count, "error") %> prohibited this bank from being saved:</h2>
+      <h2><%= pluralize(institution.errors.count, "error") %> prohibited this institution from being saved:</h2>
 
       <ul>
-        <% bank.errors.full_messages.each do |message| %>
+        <% institution.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
       </ul>
@@ -23,7 +23,7 @@
 
   <div class="field">
     <%= form.label :headers %>
-    <input name="headers-tags" value=<%= bank.headers.join(',') %>>
+    <input name="headers-tags" value=<%= institution.headers.join(',') %>>
   </div>
 
   <div class="field">
@@ -76,7 +76,7 @@
   form.addEventListener('submit', (event) => {
     var tags = tagInput.value.split(',').map((val) => {
       var i = document.createElement("input");
-      i.setAttribute('name', 'bank[headers][]');
+      i.setAttribute('name', 'institution[headers][]');
       i.setAttribute('value', val.toLowerCase());
       i.setAttribute('hidden', true);
       form.appendChild(i)

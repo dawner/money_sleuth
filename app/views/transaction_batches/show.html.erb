@@ -1,15 +1,15 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Bank:</strong>
-  <%= @transaction_batch.bank.name %>
+  <strong>Institution:</strong>
+  <%= @transaction_batch.institution.name %>
 </p>
 
 <%= render 'transactions/transactions_list', transactions: @transaction_batch.transactions %>
 
 <p>
   <strong>File:</strong>
-  <%= @transaction_batch.bank_file %>
+  <%= @transaction_batch.institution_file %>
 </p>
 
 <%= link_to 'Back', transaction_batches_path %>

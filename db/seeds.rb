@@ -3,8 +3,8 @@
 #
 # Examples:
 #
-# Create some multi country example banks
-Bank.create([
+# Create some multi country example institutions
+Institution.create([
   { slug: 'tangerine', name: 'Tangerine', currency: :cad },
   { slug: 'cibc', name: 'CIBC', currency: :cad },
   { slug: 'td', name: 'TD', currency: :cad },

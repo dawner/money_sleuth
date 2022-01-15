@@ -1,10 +1,10 @@
  require 'rails_helper'
 
 RSpec.describe "/transaction_batches", type: :request do
-  let(:bank) { create(:bank) }
-  let(:bank_file){ Rack::Test::UploadedFile.new(Rails.root.join('spec/files/example_bank_file.csv')) }
-  let(:valid_attributes){{ bank_id: bank.id, bank_file: bank_file }}
-  let(:invalid_attributes){{ bank_id: nil, bank_file: nil }}
+  let(:institution) { create(:institution) }
+  let(:institution_file){ Rack::Test::UploadedFile.new(Rails.root.join('spec/files/example_bank_file.csv')) }
+  let(:valid_attributes){{ institution_id: institution.id, institution_file: institution_file }}
+  let(:invalid_attributes){{ institution_id: nil, institution_file: nil }}
 
   describe "GET /index" do
     it "renders a successful response" do
@@ -73,13 +73,13 @@ RSpec.describe "/transaction_batches", type: :request do
 
   describe "PATCH /update" do
     context "with valid parameters" do
-      let(:new_attributes) { { bank: create(:bank, name: "Another bank") } }
+      let(:new_attributes) { { institution: create(:institution, name: "Another institution") } }
 
       it "updates the requested transaction_batch" do
         transaction_batch = create(:transaction_batch)
         patch transaction_batch_url(transaction_batch), params: { transaction_batch: new_attributes }
         transaction_batch.reload
-        transaction_batch.bank.name == "Another bank"
+        transaction_batch.institution.name == "Another institution"
       end
 
       it "redirects to the transaction_batch" do

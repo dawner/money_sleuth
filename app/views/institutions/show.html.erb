@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @institution.name %>
+</p>
+
+<p>
+  <strong>Slug:</strong>
+  <%= @institution.slug %>
+</p>
+
+<p>
+  <strong>Headers:</strong>
+  <%= @institution.headers %>
+</p>
+
+<p>
+  <strong>Headers included in file:</strong>
+  <%= @institution.headers_in_file %>
+</p>
+
+<p>
+  <strong>Expenses are negative:</strong>
+  <%= @institution.expenses_negative %>
+</p>
+
+<p>
+  <strong>Date format:</strong>
+  <%= @institution.date_format %>
+</p>
+
+<%= link_to 'Edit', edit_institution_path(@institution) %> |
+<%= link_to 'Back', institutions_path %>

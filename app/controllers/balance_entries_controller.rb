@@ -66,6 +66,6 @@ class BalanceEntriesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def balance_entry_params
-      params.require(:balance_entry).permit(:posted_on, :value, :bank_id)
+      params.require(:balance_entry).permit(:posted_on, :value, :institution_id)
     end
 end
