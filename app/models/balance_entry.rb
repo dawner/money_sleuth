@@ -1,5 +1,6 @@
 class BalanceEntry < ApplicationRecord
   belongs_to :institution
+  belongs_to :account
 
   monetize :value_cents
 

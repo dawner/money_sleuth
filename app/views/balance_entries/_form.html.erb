@@ -21,7 +21,7 @@
     <%= form.number_field :value, value: number_to_currency(form.object.value.to_f, delimiter: '', unit: ''), step: 0.01 %>
   </div>
 
-  <%= form.collection_select :institution_id, Institution.all, :id, :name %>
+  <%= form.collection_select :account_id, Account.all, :id, :name %>
 
   <br>
   <div class="actions">
