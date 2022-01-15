@@ -21,6 +21,9 @@
         <td><%= balance_entry.account.institution.name %></td>
         <td><%= balance_entry.account.name %></td>
         <td><%= balance_entry.value.format %></td>
+        <td><%= link_to 'Show', balance_entry %></td>
+        <td><%= link_to 'Edit', edit_balance_entry_path(balance_entry) %></td>
+        <td><%= link_to 'Destroy', balance_entry, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
     <tr>
