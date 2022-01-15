@@ -1,5 +1,6 @@
 class Account < ApplicationRecord
   belongs_to :institution
+  has_many :balance_entries, dependent: :destroy
 
   validates_presence_of :name
 

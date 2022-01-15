@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :transaction_batch do
     institution
-    institution_file { Rack::Test::UploadedFile.new(Rails.root.join('spec/files/example_bank
+    file { Rack::Test::UploadedFile.new(Rails.root.join('spec/files/example_bank
       _file.csv')) }
   end
 end

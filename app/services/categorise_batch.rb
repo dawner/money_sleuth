@@ -16,7 +16,7 @@ class CategoriseBatch
           force_utf8: true,
           user_provided_headers: institution.headers
         }
-        institution_csv = SmarterCSV.process(transaction_batch.institution_file.current_path, institution_format_options)
+        institution_csv = SmarterCSV.process(transaction_batch.file.current_path, institution_format_options)
         institution_csv.each do |line|
           amount = line[:value].is_a?(String) ? line[:value].gsub(/\$|,/, '').to_f : line[:value]
           next unless amount && amount.nonzero? # Remove transactions without a dollar value

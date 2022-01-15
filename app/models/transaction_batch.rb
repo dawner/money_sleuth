@@ -4,5 +4,5 @@ class TransactionBatch < ApplicationRecord
 
   mount_uploader :file, InstitutionFileUploader
 
-  validates_presence_of :institution, :institution_file
+  validates_presence_of :institution, :file
 end

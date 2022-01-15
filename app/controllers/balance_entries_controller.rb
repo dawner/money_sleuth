@@ -3,8 +3,19 @@ class BalanceEntriesController < ApplicationController
 
   # GET /balance_entries or /balance_entries.json
   def index
-    @balance_entries = BalanceEntry.includes(account: :institution).order('accounts.institution_id')
-    @total_value = Money.new(@balance_entries.sum(:value_cents))
+    balance_entries = BalanceEntry.all.select('DISTINCT ON (account_id) balance_entries.*')
+      .includes(account: :institution)
+      .order(:account_id, posted_on: :desc)
+    balance_entries_by_institution = balance_entries.group_by{ |e| e.account.institution }
+
+    @total_value = Money.new(0)
+    @balance_data = balance_entries_by_institution.reduce({}) do |result, (institution, entries)|
+      institution_total = Money.new(entries.sum(&:value_cents))
+      @total_value += institution_total
+      result[institution.name] = { balance_entries: entries, total: institution_total }
+      result
+    end
+
   end
 
   # GET /balance_entries/1 or /balance_entries/1.json
@@ -66,6 +77,6 @@ class BalanceEntriesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def balance_entry_params
-      params.require(:balance_entry).permit(:posted_on, :value, :institution_id)
+      params.require(:balance_entry).permit(:posted_on, :value, :account_id)
     end
 end

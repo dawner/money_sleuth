@@ -7,28 +7,37 @@
   <thead>
     <tr>
       <th>Posted on</th>
-      <th>Institution</th>
       <th>Account</th>
       <th>Value</th>
-      <th colspan="3"></th>
+      <th>Actions</th>
+      <th>Totals</th>
     </tr>
   </thead>
 
   <tbody>
-    <% @balance_entries.each do |balance_entry| %>
+    <% @balance_data.each do |institution_name, institution_data| %>
       <tr>
-        <td><%= balance_entry.posted_on %></td>
-        <td><%= balance_entry.account.institution.name %></td>
-        <td><%= balance_entry.account.name %></td>
-        <td><%= balance_entry.value.format %></td>
-        <td><%= link_to 'Show', balance_entry %></td>
-        <td><%= link_to 'Edit', edit_balance_entry_path(balance_entry) %></td>
-        <td><%= link_to 'Destroy', balance_entry, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td colspan="4"><strong><%= institution_name %></strong></td>
+        <td><strong><%= institution_data[:total].format %></strong></td>
       </tr>
+
+      <% institution_data[:balance_entries].each do |balance_entry| %>
+        <tr>
+          <td><%= balance_entry.posted_on %></td>
+          <td><%= balance_entry.account.name %></td>
+          <td><%= balance_entry.value.format %></td>
+          <td>
+            <em>
+              <%= link_to 'Edit', edit_balance_entry_path(balance_entry) %>
+              | <%= link_to 'Destroy', balance_entry, method: :delete, data: { confirm: 'Are you sure?' } %>
+            </em>
+          </td>
+        </tr>
+      <% end %>
     <% end %>
     <tr>
-      <td colspan="3"><strong>Total</strong></td>
-      <td><strong><%= @total_value.format %></strong></td>
+      <td colspan="4"><strong>Grand Total</strong></td>
+      <td><strong><u><%= @total_value.format %></u></strong></td>
     </tr>
   </tbody>
 </table>

@@ -14,9 +14,9 @@
   <%= form.collection_select :institution_id, Institution.all, :id, :name %>
 
   <div class="field">
-    <%= form.label :institution_file %>
-    <%= form.file_field :institution_file %>
-    <%= form.hidden_field :institution_file_cache %>
+    <%= form.label :file %>
+    <%= form.file_field :file %>
+    <%= form.hidden_field :file_cache %>
   </div>
 
 

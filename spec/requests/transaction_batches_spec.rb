@@ -2,9 +2,9 @@
 
 RSpec.describe "/transaction_batches", type: :request do
   let(:institution) { create(:institution) }
-  let(:institution_file){ Rack::Test::UploadedFile.new(Rails.root.join('spec/files/example_bank_file.csv')) }
-  let(:valid_attributes){{ institution_id: institution.id, institution_file: institution_file }}
-  let(:invalid_attributes){{ institution_id: nil, institution_file: nil }}
+  let(:file){ Rack::Test::UploadedFile.new(Rails.root.join('spec/files/example_bank_file.csv')) }
+  let(:valid_attributes){{ institution_id: institution.id, file: file }}
+  let(:invalid_attributes){{ institution_id: nil, file: nil }}
 
   describe "GET /index" do
     it "renders a successful response" do
