@@ -3,7 +3,7 @@ class BalanceEntriesController < ApplicationController
 
   # GET /balance_entries or /balance_entries.json
   def index
-    @balance_entries = BalanceEntry.all.order(value_cents: :desc)
+    @balance_entries = BalanceEntry.includes(account: :institution).order('accounts.institution_id')
     @total_value = Money.new(@balance_entries.sum(:value_cents))
   end
 
