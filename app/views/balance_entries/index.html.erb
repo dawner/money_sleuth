@@ -1,7 +1,9 @@
+<% content_for(:page_title) { 'Balances' } %>
+
 <p id="notice"><%= notice %></p>
 <%= link_to 'Back', root_path %>
 
-<h1>Balance Entries</h1>
+
 
 <h3>Total value: <u><%= @total_value.format %></u></h3>
 <h3>Liquid value: <u><%= @total_liquid.format %></u></h3>

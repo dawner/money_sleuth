@@ -1,3 +1,9 @@
+<% content_for(:page_title) { 'Institutions' } %>
+<% content_for(:breadcrumbs)  do %>
+  <li><%= link_to 'Institutions', institutions_path %></li>
+  <li class="is-active"><a href="#" aria-current="page"><%= @institution.name%></a></li>
+<% end %>
+
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -30,5 +36,4 @@
   <%= @institution.date_format %>
 </p>
 
-<%= link_to 'Edit', edit_institution_path(@institution) %> |
-<%= link_to 'Back', institutions_path %>
+<%= link_to 'Edit', edit_institution_path(@institution) %>

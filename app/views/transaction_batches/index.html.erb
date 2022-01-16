@@ -1,7 +1,6 @@
-<p id="notice"><%= notice %></p>
-<%= link_to 'Back', root_path %>
+<% content_for(:page_title) { 'Statements' } %>
 
-<h1>Transaction Batches</h1>
+<p id="notice"><%= notice %></p>
 
 <table>
   <thead>
@@ -25,4 +24,4 @@
 </table>
 
 <br>
-<%= link_to 'Upload new batch', new_transaction_batch_path %>
+<%= link_to 'Upload new statement', new_transaction_batch_path %>

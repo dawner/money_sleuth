@@ -1,7 +1,6 @@
-<p id="notice"><%= notice %></p>
-<%= link_to 'Back', root_path %>
+<% content_for(:page_title) { 'Accounts' } %>
 
-<h1>Accounts</h1>
+<p id="notice"><%= notice %></p>
 
 <% @accounts_by_institution.each do |institution_name, accounts| %>
   <h3><%= institution_name %></h3>

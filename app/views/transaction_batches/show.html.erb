@@ -1,3 +1,9 @@
+<% content_for(:page_title) { 'Statements' } %>
+<% content_for(:breadcrumbs)  do %>
+  <li><%= link_to 'Statements', transaction_batches_path %></li>
+  <li class="is-active"><a href="#" aria-current="page"><%= @transaction_batch.institution.name%></a></li>
+<% end %>
+
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -11,5 +17,3 @@
   <strong>File:</strong>
   <%= @transaction_batch.file %>
 </p>
-
-<%= link_to 'Back', transaction_batches_path %>

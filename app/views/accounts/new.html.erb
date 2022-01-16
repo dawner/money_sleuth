@@ -1,5 +1,7 @@
-<h1>New Account</h1>
+<% content_for(:page_title) { 'Accounts' } %>
+<% content_for(:breadcrumbs)  do %>
+  <li><%= link_to 'Accounts', accounts_path %></li>
+  <li class="is-active"><a href="#" aria-current="page">New</a></li>
+<% end %>
 
 <%= render 'form', account: @account %>
-
-<%= link_to 'Back', accounts_path %>

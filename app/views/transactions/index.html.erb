@@ -1,7 +1,6 @@
-<p id="notice"><%= notice %></p>
-<%= link_to 'Back', root_path %>
+<% content_for(:page_title) { 'Transactions' } %>
 
-<h1>Transactions</h1>
+<p id="notice"><%= notice %></p>
 
 <%= render 'transactions_list', transactions: @transactions %>
 <br>
