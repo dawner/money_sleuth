@@ -9,17 +9,15 @@ class BalanceEntriesController < ApplicationController
     balance_entries_by_institution = balance_entries.group_by{ |e| e.account.institution }
 
     @total_value = Money.new(0)
+    @total_liquid = Money.new(0)
     @balance_data = balance_entries_by_institution.reduce({}) do |result, (institution, entries)|
       institution_total = Money.new(entries.sum(&:value_cents))
       @total_value += institution_total
+      @total_liquid += Money.new(entries.sum{ |e| e.account.liquid? ? e.value_cents : 0 })
       result[institution.name] = { balance_entries: entries, total: institution_total }
       result
     end
 
-  end
-
-  # GET /balance_entries/1 or /balance_entries/1.json
-  def show
   end
 
   # GET /balance_entries/new

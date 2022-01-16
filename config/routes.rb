@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resources :categories
   resources :institutions
   resources :accounts
-  resources :balance_entries
+  resources :balance_entries, except: [:show]
 
   # Summaries
   resources :expenses, only: :index
