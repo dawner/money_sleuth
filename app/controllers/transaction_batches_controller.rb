@@ -20,11 +20,11 @@ class TransactionBatchesController < ApplicationController
   # POST /transaction_batches
   # POST /transaction_batches.json
   def create
-    @transaction_batch = TransactionBatch.create(transaction_batch_create_params)
+    @transaction_batch = TransactionBatch.new(transaction_batch_create_params)
 
     result = CategoriseBatch.call({ transaction_batch: @transaction_batch })
     respond_to do |format|
-      if result.success?
+      if result.success? && @transaction_batch.save
         format.html { redirect_to @transaction_batch, notice: 'Transaction batch was successfully created.' }
         format.json { render :show, status: :created, location: @transaction_batch }
       else

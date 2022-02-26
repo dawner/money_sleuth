@@ -35,7 +35,7 @@ class BalanceEntriesController < ApplicationController
 
     respond_to do |format|
       if @balance_entry.save
-        format.html { redirect_to balance_entry_url(@balance_entry), notice: "Balance entry was successfully created." }
+        format.html { redirect_to balance_entries_url, notice: "Balance entry was successfully created." }
         format.json { render :show, status: :created, location: @balance_entry }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -48,7 +48,7 @@ class BalanceEntriesController < ApplicationController
   def update
     respond_to do |format|
       if @balance_entry.update(balance_entry_params)
-        format.html { redirect_to balance_entry_url(@balance_entry), notice: "Balance entry was successfully updated." }
+        format.html { redirect_to balance_entries_url, notice: "Balance entry was successfully updated." }
         format.json { render :show, status: :ok, location: @balance_entry }
       else
         format.html { render :edit, status: :unprocessable_entity }

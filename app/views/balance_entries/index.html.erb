@@ -33,8 +33,7 @@
           <td><%= balance_entry.value.format %></td>
           <td>
             <em>
-              <%= link_to 'Edit', edit_balance_entry_path(balance_entry) %>
-              | <%= link_to 'Destroy', balance_entry, method: :delete, data: { confirm: 'Are you sure?' } %>
+              <%= link_to 'Delete', balance_entry, method: :delete, data: { confirm: 'Are you sure?' } %>
             </em>
           </td>
         </tr>
