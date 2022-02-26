@@ -4,7 +4,7 @@ class TransactionBatchesController < ApplicationController
   # GET /transaction_batches
   # GET /transaction_batches.json
   def index
-    @transaction_batches = TransactionBatch.all
+    @transaction_batches = TransactionBatch.all.includes(:transactions).order('transactions.posted_on')
   end
 
   # GET /transaction_batches/1

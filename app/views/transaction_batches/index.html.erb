@@ -5,8 +5,9 @@
 <table>
   <thead>
     <tr>
-      <th>Upload ref</th>
+      <th>Period</th>
       <th>Institution</th>
+      <th>Upload ref</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -14,8 +15,11 @@
   <tbody>
     <% @transaction_batches.each do |transaction_batch| %>
       <tr>
-        <td><%= transaction_batch.file %></td>
+        <td>
+          <%= l(transaction_batch.transactions.minimum(:posted_on), format: :short)%> -
+          <%= l(transaction_batch.transactions.maximum(:posted_on), format: :short)%></td>
         <td><%= transaction_batch.institution.name %></td>
+        <td><%= File.basename(transaction_batch.file.path) %></td>
         <td><%= link_to 'Show', transaction_batch %></td>
         <td><%= link_to 'Destroy', transaction_batch, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
