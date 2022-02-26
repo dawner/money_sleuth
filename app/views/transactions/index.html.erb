@@ -1,7 +1,10 @@
 <% content_for(:page_title) { 'Transactions' } %>
 
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <p id="notice"><%= notice %></p>
 
-<%= render 'transactions_list', transactions: @transactions %>
-<br>
-<%= link_to 'Upload new transactions', new_transaction_batch_path %>
+  <%= render 'transaction_filters', filters: @filters %>
+  <%= render 'transactions_table', transactions: @transactions %>
+  <br>
+  <%= link_to 'Upload new transactions', new_transaction_batch_path %>
+</div>

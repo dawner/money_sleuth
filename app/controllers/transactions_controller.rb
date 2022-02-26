@@ -1,11 +1,17 @@
 class TransactionsController < ApplicationController
   before_action :set_transaction, only: [:update, :destroy]
 
+  VALID_FILTERS = [:category_id, :start_date, :end_date]
+
   # GET /transactions
   # GET /transactions.json
   def index
     @transactions = Transaction.all
-    @transactions = @transactions.where(category_id: params[:category_id]) if params[:category_id]
+    @oldest_date = @transactions.minimum(:posted_on)
+
+    @filters = valid_filters
+    @transactions = @transactions.where(posted_on: @filters[:start_date]..@filters[:end_date] )
+    @transactions = @transactions.where(category_id: @filters[:category_id]) if @filters[:category_id]
   end
 
   # PATCH/PUT /transactions/1
@@ -14,7 +20,7 @@ class TransactionsController < ApplicationController
     # TODO rerun categorizer if institution headers changing
     respond_to do |format|
       if @transaction.update(transaction_update_params)
-        format.js { render json: nil, status: :ok }
+        format.js { render json: nil, status: :ok } #TODO toast notification of success/error
         format.html { redirect_to @transaction, notice: 'Transaction was successfully updated.' }
         format.json { render :show, status: :ok, location: @transaction }
       else
@@ -36,6 +42,18 @@ class TransactionsController < ApplicationController
   end
 
   private
+
+    def valid_filters
+      filters = params.permit(VALID_FILTERS).to_h.symbolize_keys
+      filters[:start_date] = filter_date(filters[:start_date], (Date.today - 1.month).at_beginning_of_month)
+      filters[:end_date] = filter_date(filters[:end_date], Date.today)
+      filters
+    end
+
+    def filter_date(date_from_params, default_date)
+      date_from_params ? date_from_params.to_date : default_date
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_transaction
       @transaction = Transaction.find(params[:id])
