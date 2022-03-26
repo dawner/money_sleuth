@@ -32,3 +32,6 @@ yarn-debug.log*
 
 # Ignore local transaction file uploads
 /public/uploads
+
+# Don't commit env variables
+.env
