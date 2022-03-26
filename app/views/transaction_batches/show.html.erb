@@ -11,7 +11,7 @@
   <%= @transaction_batch.institution.name %>
 </p>
 
-<%= render 'transactions/transactions_list', transactions: @transaction_batch.transactions %>
+<%= render 'transactions/transactions_table', transactions: @transaction_batch.transactions %>
 
 <p>
   <strong>File:</strong>
