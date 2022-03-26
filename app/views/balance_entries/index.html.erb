@@ -1,0 +1,48 @@
+<% content_for(:page_title) { 'Balances' } %>
+
+<p id="notice"><%= notice %></p>
+<%= link_to 'Back', root_path %>
+
+
+
+<h3>Total value: <u><%= @total_value.format %></u></h3>
+<h3>Liquid value: <u><%= @total_liquid.format %></u></h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Posted on</th>
+      <th>Account</th>
+      <th>Value</th>
+      <th>Actions</th>
+      <th>Totals</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @balance_data.each do |institution_name, institution_data| %>
+      <tr>
+        <td colspan="4"><strong><%= institution_name %></strong></td>
+        <td><strong><%= institution_data[:total].format %></strong></td>
+      </tr>
+
+      <% institution_data[:balance_entries].each do |balance_entry| %>
+        <tr>
+          <td><%= balance_entry.posted_on %></td>
+          <td><%= balance_entry.account.name %></td>
+          <td><%= balance_entry.value.format %></td>
+          <td>
+            <em>
+              <%= link_to 'Delete', balance_entry, method: :delete, data: { confirm: 'Are you sure?' } %>
+            </em>
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Balance Entry', new_balance_entry_path %>

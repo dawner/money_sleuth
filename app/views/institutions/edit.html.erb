@@ -1,0 +1,8 @@
+<% content_for(:page_title) { 'Institutions' } %>
+<% content_for(:breadcrumbs)  do %>
+  <li><%= link_to 'Institutions', institutions_path %></li>
+  <li><%= link_to @institution.name, @institution %></li>
+  <li class="is-active"><a href="#" aria-current="page">Edit</a></li>
+<% end %>
+
+<%= render 'form', institution: @institution %>

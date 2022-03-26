@@ -3,5 +3,39 @@
 #
 # Examples:
 #
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+# Create some multi country example institutions
+Institution.create([
+  { slug: 'tangerine', name: 'Tangerine', currency: :cad },
+  { slug: 'cibc', name: 'CIBC', currency: :cad },
+  { slug: 'td', name: 'TD', currency: :cad },
+  { slug: 'anz', name: 'ANZ', currency: :nzd },
+  { slug: 'kiwibank', name: 'Kiwibank', currency: :nzd }
+])
+
+# Create basic categories
+Category.create([
+  { name: 'Housing', keywords: [] },
+  { name: 'Bills & Utilities', keywords: ['insurance', 'fortis', 'hydro', 'spotify', 'mobile']},
+  { name: 'Groceries', keywords: [] },
+  { name: 'Transport', keywords: ['compass'] },
+  {
+    name: 'Health',
+    keywords: ['health', 'dental', 'doctor']
+  },
+  { name: 'Hobbies & Entertainment', keywords: [] },
+  { name: 'Shopping', keywords: [] },
+  {
+    name: 'Dining out',
+    keywords: ['cafe', 'coffee', 'beer', 'burger', 'brewing']
+  },
+  { name: 'Vacation', keywords: [] },
+  {
+    name: 'Gifts/Donations',
+    keywords: ['foundation']
+  },
+  { name: 'Transfers', transaction_type: :internal, keywords: ['payment'] },
+  { name: 'Miscellaneous', keywords: [] },
+  { name: 'Employment', transaction_type: :income, keywords: [] },
+  { name: 'Interest & Dividends', transaction_type: :income, keywords: [] },
+  { name: 'Bonus Income', transaction_type: :income, keywords: [] },
+])

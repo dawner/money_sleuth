@@ -1,0 +1,30 @@
+<% content_for(:page_title) { 'Accounts' } %>
+
+<p id="notice"><%= notice %></p>
+
+<% @accounts_by_institution.each do |institution_name, accounts| %>
+  <h3><%= institution_name %></h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Account type</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% accounts.each do |account| %>
+        <tr>
+          <td><%= account.name %></td>
+          <td><%= account.account_type.humanize %></td>
+          <td><%= link_to 'Show', account %></td>
+          <td><%= link_to 'Edit', edit_account_path(account) %></td>
+          <td><%= link_to 'Destroy', account, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+<br>
+
+<%= link_to 'New Account', new_account_path %>

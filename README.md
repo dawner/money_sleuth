@@ -1,24 +1,25 @@
-# README
+# MoneySleuth
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A simple tool for managing income, expenses & balances across multiple countries. Includes customizable support for importing statements institutions and categorise transactions to generate reports.
 
-Things you may want to cover:
+### Prerequisites
 
-* Ruby version
+- Ruby 2.7.1
+- Rails 6.0.2
 
-* System dependencies
+### Installation
 
-* Configuration
+1. Check out the repository
+   `git clone git@github.com/dawner/money_sleuth.git`
 
-* Database creation
+2. Create and setup the database
 
-* Database initialization
+```
+bundle exec rake db:create
+bundle exec rake db:setup
+```
 
-* How to run the test suite
+4. Start the Rails server
+   `bundle exec rails s`
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+You can now visit the site with the URL http://localhost:3000

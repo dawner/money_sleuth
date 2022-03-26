@@ -1,0 +1,7 @@
+<% content_for(:page_title) { 'Balances' } %>
+<% content_for(:breadcrumbs)  do %>
+  <li><%= link_to 'Balances', balance_entries_path %></li>
+  <li class="is-active"><a href="#" aria-current="page">Edit</a></li>
+<% end %>
+
+<%= render 'form', balance_entry: @balance_entry %>

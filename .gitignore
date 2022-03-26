@@ -29,3 +29,9 @@
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+
+# Ignore local transaction file uploads
+/public/uploads
+
+# Don't commit env variables
+.env

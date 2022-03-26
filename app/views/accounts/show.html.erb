@@ -1,0 +1,24 @@
+<% content_for(:page_title) { 'Accounts' } %>
+<% content_for(:breadcrumbs)  do %>
+  <li><%= link_to 'Accounts', accounts_path %></li>
+  <li class="is-active"><a href="#" aria-current="page"><%= @account.name%></a></li>
+<% end %>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @account.name %>
+</p>
+
+<p>
+  <strong>Account type:</strong>
+  <%= @account.account_type.humanize %>
+</p>
+
+<p>
+  <strong>Institution:</strong>
+  <%= @account.institution.name %>
+</p>
+
+<%= link_to 'Edit', edit_account_path(@account) %>

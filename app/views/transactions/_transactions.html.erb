@@ -1,0 +1,13 @@
+<% transactions.order(:posted_on).each do |transaction| %>
+    <tr>
+      <td><%= l(transaction.posted_on) %></td>
+      <td><%= transaction.value.format %></td>
+      <td>
+        <% ajax_options = { data: { remote: true, method: :put, url: transaction_path(id: transaction.id)}} %>
+        <%= form_with model: transaction do |f| %>
+          <%= f.grouped_collection_select :category_id, all_categories_grouped, :categories, :name, :id, :name, {}, ajax_options %>
+        <% end %>
+      </td>
+      <td><%= transaction.description %></td>
+    </tr>
+<% end %>

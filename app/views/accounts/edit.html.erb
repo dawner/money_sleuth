@@ -1,0 +1,8 @@
+<% content_for(:page_title) { 'Accounts' } %>
+<% content_for(:breadcrumbs)  do %>
+  <li><%= link_to 'Accounts', accounts_path %></li>
+  <li><%= link_to @account.name, @account %></li>
+  <li class="is-active"><a href="#" aria-current="page">Edit</a></li>
+<% end %>
+
+<%= render 'form', account: @account %>

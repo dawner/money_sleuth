@@ -1,0 +1,58 @@
+<%= form_with(model: category, local: true) do |form| %>
+  <% if category.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(category.errors.count, "error") %> prohibited this category from being saved:</h2>
+
+      <ul>
+        <% category.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :transaction_type %>
+
+    <% Category.transaction_types.keys.each do |transaction_type| %>
+      <%= form.label "transaction_type_#{transaction_type}".to_sym do %>
+        <%= form.radio_button :transaction_type, transaction_type %>
+        <%= transaction_type.humanize %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= form.label :keywords %>
+    <input name="keyword-tags" value=<%= category.keywords.join(',') %>>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+<script>
+  var tagInput = document.querySelector('input[name="keyword-tags"]');
+  var tagify = new Tagify(tagInput, {
+    originalInputValueFormat: valuesArr => valuesArr.map(item => item.value).join(',')
+  })
+
+  // Transform Tagify input format into an array input fields
+  var form = tagInput.form
+  form.addEventListener('submit', (event) => {
+    var tags = tagInput.value.split(',').map((val) => {
+      var i = document.createElement("input");
+      i.setAttribute('name', 'category[keywords][]');
+      i.setAttribute('value', val.toLowerCase());
+      i.setAttribute('hidden', true);
+      form.appendChild(i)
+    });
+    tagInput.parentNode.removeChild(tagInput);
+  });
+</script>

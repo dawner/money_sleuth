@@ -1,0 +1,64 @@
+<% content_for(:page_title) { 'Reports' } %>
+
+<p id="notice"><%= notice %></p>
+
+<section class="section">
+  <h2 class="subtitle">Expenses</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Category</th>
+        <th>Percentage</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @expenses_categories.each do |category, value| %>
+        <tr>
+          <td><%= link_to category.name, transactions_path(category_id: category.id) %></td>
+          <td><%= format_percent(value, @expenses_sum) %>%</td>
+          <td><%= (-value).format %></td>
+        </tr>
+      <% end %>
+      <tr>
+        <td><strong>Total</strong></td>
+        <td></td>
+        <td><strong><%= (-@expenses_sum).format %></strong></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="section">
+
+  <h2 class="subtitle">Income</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Category</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @income_categories.each do |category, value| %>
+        <tr>
+          <td><%= category.name %></td>
+          <td><%= value.format %></td>
+        </tr>
+      <% end %>
+      <tr>
+        <td><strong>Total</strong></td>
+        <td><strong><%= -@income_sum.format %></strong></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="section">
+  <h2 class="subtitle">Savings</h1>
+  <p><%= (@income_sum - -@expenses_sum).format %> (<%= (((@income_sum - -@expenses_sum)/@income_sum)*100).round %>%)
+</section>

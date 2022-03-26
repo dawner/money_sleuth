@@ -1,0 +1,26 @@
+<%= form_with(model: transaction_batch, local: true, html: { multipart: true }) do |form| %>
+  <% if transaction_batch.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(transaction_batch.errors.count, "error") %> prohibited this transaction_batch from being saved:</h2>
+
+      <ul>
+        <% transaction_batch.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form.collection_select :institution_id, Institution.all, :id, :name %>
+
+  <div class="field">
+    <%= form.label :file %>
+    <%= form.file_field :file %>
+    <%= form.hidden_field :file_cache %>
+  </div>
+
+
+  <div class="actions">
+    <%= form.submit "Upload" %>
+  </div>
+<% end %>

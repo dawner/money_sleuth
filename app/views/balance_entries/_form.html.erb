@@ -1,0 +1,30 @@
+<%= form_with(model: balance_entry, local: true) do |form| %>
+  <% if balance_entry.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(balance_entry.errors.count, "error") %> prohibited this balance_entry from being saved:</h2>
+
+      <ul>
+        <% balance_entry.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :posted_on %>
+    <%= form.date_select :posted_on %>
+  </div>
+
+  <div class="field">
+    <%= form.label :value %>
+    <%= form.number_field :value, value: number_to_currency(form.object.value.to_f, delimiter: '', unit: ''), step: 0.01 %>
+  </div>
+
+  <%= form.collection_select :account_id, Account.all.order(:institution_id), :id, :name %>
+
+  <br>
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
