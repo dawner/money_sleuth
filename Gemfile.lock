@@ -217,7 +217,7 @@ GEM
       childprocess (>= 0.5, < 5.0)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2)
-    smarter_csv (1.2.9)
+    smarter_csv (1.4.2)
     spring (2.1.1)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
@@ -277,7 +277,7 @@ DEPENDENCIES
   rspec-rails (~> 4.0.0)
   sass-rails (>= 6)
   selenium-webdriver
-  smarter_csv
+  smarter_csv (~> 1.4)
   spring
   spring-watcher-listen (~> 2.0.0)
   turbolinks (~> 5)

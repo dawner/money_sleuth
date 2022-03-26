@@ -33,7 +33,7 @@ gem 'money-rails', '~>1.12'
 # File upload support
 gem 'carrierwave', '~> 2.1'
 # More efficient CSV processing
-gem 'smarter_csv'
+gem 'smarter_csv','~>1.4'
 # Simple service object handling
 gem "interactor", "~> 3.0"
 
