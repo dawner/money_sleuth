@@ -1,6 +1,7 @@
 <% content_for(:page_title) { 'Institutions' } %>
 
 <p id="notice"><%= notice %></p>
+<%= link_to 'New Institution', new_institution_path %>
 
 <table>
   <thead>
@@ -21,7 +22,3 @@
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Institution', new_institution_path %>

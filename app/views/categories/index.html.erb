@@ -1,6 +1,7 @@
 <% content_for(:page_title) { 'Categories' } %>
 
 <p id="notice"><%= notice %></p>
+<%= link_to 'New Category', new_category_path %>
 
 <table>
   <thead>
@@ -25,7 +26,3 @@
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Category', new_category_path %>

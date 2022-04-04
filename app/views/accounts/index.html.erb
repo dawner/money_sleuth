@@ -1,6 +1,7 @@
 <% content_for(:page_title) { 'Accounts' } %>
 
 <p id="notice"><%= notice %></p>
+<%= link_to 'New Account', new_account_path %>
 
 <% @accounts_by_institution.each do |institution_name, accounts| %>
   <h3><%= institution_name %></h3>
@@ -26,5 +27,3 @@
   </table>
 <% end %>
 <br>
-
-<%= link_to 'New Account', new_account_path %>

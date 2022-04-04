@@ -3,6 +3,11 @@
 <p id="notice"><%= notice %></p>
 
 <section class="section">
+  <h2 class="subtitle">Savings</h1>
+  <p><%= (@income_sum - -@expenses_sum).format %> (<%= (((@income_sum - -@expenses_sum)/(@income_sum.nonzero? || 1))*100).round %>%)
+</section>
+
+<section class="section">
   <h2 class="subtitle">Expenses</h1>
 
   <table>
@@ -58,7 +63,3 @@
   </table>
 </section>
 
-<section class="section">
-  <h2 class="subtitle">Savings</h1>
-  <p><%= (@income_sum - -@expenses_sum).format %> (<%= (((@income_sum - -@expenses_sum)/(@income_sum.nonzero? || 1))*100).round %>%)
-</section>

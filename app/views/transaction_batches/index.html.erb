@@ -1,6 +1,7 @@
 <% content_for(:page_title) { 'Statements' } %>
 
 <p id="notice"><%= notice %></p>
+<%= link_to 'Upload new statement', new_transaction_batch_path %>
 
 <table>
   <thead>
@@ -27,5 +28,3 @@
   </tbody>
 </table>
 
-<br>
-<%= link_to 'Upload new statement', new_transaction_batch_path %>

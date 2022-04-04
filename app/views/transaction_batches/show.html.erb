@@ -3,6 +3,7 @@
   <li><%= link_to 'Statements', transaction_batches_path %></li>
   <li class="is-active"><a href="#" aria-current="page"><%= @transaction_batch.institution.name%></a></li>
 <% end %>
+<%= link_to 'Upload new statement', new_transaction_batch_path %>
 
 <p id="notice"><%= notice %></p>
 

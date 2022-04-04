@@ -2,9 +2,8 @@
 
 <div class="container">
   <p id="notice"><%= notice %></p>
+  <%= link_to 'Upload new transactions', new_transaction_batch_path %>
 
   <%= render 'transaction_filters', filters: @filters %>
   <%= render 'transactions_table', transactions: @transactions %>
-  <br>
-  <%= link_to 'Upload new transactions', new_transaction_batch_path %>
 </div>

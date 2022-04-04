@@ -2,11 +2,12 @@
 
 <p id="notice"><%= notice %></p>
 <%= link_to 'Back', root_path %>
-
-
-
+ |
+<%= link_to 'New Balance Entry', new_balance_entry_path %>
+<p>---------</p>
 <h3>Total value: <u><%= @total_value.format %></u></h3>
 <h3>Liquid value: <u><%= @total_liquid.format %></u></h3>
+<br/>
 
 <table>
   <thead>
@@ -42,7 +43,3 @@
 
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Balance Entry', new_balance_entry_path %>
