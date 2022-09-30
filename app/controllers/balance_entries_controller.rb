@@ -5,6 +5,7 @@ class BalanceEntriesController < ApplicationController
   def index
     balance_entries = BalanceEntry.all.select('DISTINCT ON (account_id) balance_entries.*')
       .includes(account: :institution)
+      .where(account: { active: true })
       .order(:account_id, posted_on: :desc)
     balance_entries_by_institution = balance_entries.group_by{ |e| e.account.institution }
 

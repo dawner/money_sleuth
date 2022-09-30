@@ -28,6 +28,11 @@
   </div>
 
   <div class="field">
+    <%= form.label :active %>
+    <%= form.check_box :active %>
+  </div>
+
+  <div class="field">
     <%= form.collection_select :institution_id, Institution.all, :id, :name %>
   </div>
 

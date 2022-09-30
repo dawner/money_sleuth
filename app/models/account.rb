@@ -8,6 +8,8 @@ class Account < ApplicationRecord
 
   LIQUID_TYPES = ['bank', 'investment', 'credit_card']
 
+  scope :active, -> { where(active: true) }
+
   def liquid?
     LIQUID_TYPES.include?(account_type)
   end
