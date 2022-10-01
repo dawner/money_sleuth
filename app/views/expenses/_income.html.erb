@@ -1,0 +1,10 @@
+<% income_categories.reverse.each do |category, value| %>
+  <tr>
+    <td><%= category.name %></td>
+    <td><%= value.format %></td>
+  </tr>
+<% end %>
+<tr>
+  <td><strong>Total</strong></td>
+  <td><strong><%= -income_sum.format %></strong></td>
+</tr>

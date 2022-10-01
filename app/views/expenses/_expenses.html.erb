@@ -1,0 +1,12 @@
+<% expenses_categories.each do |category, value| %>
+  <tr>
+    <td><%= link_to category.name, transactions_path(category_id: category.id) %></td>
+    <td><%= format_percent(value, expenses_sum) %>%</td>
+    <td><%= (-value).format %></td>
+  </tr>
+<% end %>
+<tr>
+  <td><strong>Total</strong></td>
+  <td></td>
+  <td><strong><%= (-expenses_sum).format %></strong></td>
+</tr>

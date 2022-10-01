@@ -1,0 +1,8 @@
+var expenses = document.querySelector("#expenses");
+expenses.innerHTML = "<%= j render 'expenses', expenses_categories: @expenses_categories, expenses_sum: @expenses_sum %>";
+
+var income = document.querySelector("#income");
+income.innerHTML = "<%= j render 'income', income_categories: @income_categories, income_sum: @income_sum %>";
+
+var savings = document.querySelector("#savings");
+savings.innerHTML = "<%= j render 'savings', savings_total: @savings_total, income_sum: @income_sum %>";

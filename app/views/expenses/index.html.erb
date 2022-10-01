@@ -2,9 +2,13 @@
 
 <p id="notice"><%= notice %></p>
 
+<%= render 'filters', filters: @filters %>
+
 <section class="section">
   <h2 class="subtitle">Savings</h1>
-  <p><%= (@income_sum - -@expenses_sum).format %> (<%= (((@income_sum - -@expenses_sum)/(@income_sum.nonzero? || 1))*100).round %>%)
+  <p id=savings>
+    <%= render 'savings', savings_total: @savings_total, income_sum: @income_sum %>
+  </p>
 </section>
 
 <section class="section">
@@ -19,19 +23,8 @@
       </tr>
     </thead>
 
-    <tbody>
-      <% @expenses_categories.each do |category, value| %>
-        <tr>
-          <td><%= link_to category.name, transactions_path(category_id: category.id) %></td>
-          <td><%= format_percent(value, @expenses_sum) %>%</td>
-          <td><%= (-value).format %></td>
-        </tr>
-      <% end %>
-      <tr>
-        <td><strong>Total</strong></td>
-        <td></td>
-        <td><strong><%= (-@expenses_sum).format %></strong></td>
-      </tr>
+    <tbody id="expenses">
+      <%= render 'expenses', expenses_categories: @expenses_categories, expenses_sum: @expenses_sum %>
     </tbody>
   </table>
 </section>
@@ -48,17 +41,8 @@
       </tr>
     </thead>
 
-    <tbody>
-      <% @income_categories.each do |category, value| %>
-        <tr>
-          <td><%= category.name %></td>
-          <td><%= value.format %></td>
-        </tr>
-      <% end %>
-      <tr>
-        <td><strong>Total</strong></td>
-        <td><strong><%= -@income_sum.format %></strong></td>
-      </tr>
+    <tbody id="income">
+      <%= render 'income', income_categories: @income_categories, income_sum: @income_sum %>
     </tbody>
   </table>
 </section>
