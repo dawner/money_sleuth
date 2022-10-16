@@ -1,13 +1,11 @@
-<% ajax_options = { data: { remote: true, method: :get, url: transactions_path}} %>
-
-<div class="field is-horizontal">
+<div id="transaction-filters" class="field is-horizontal">
     <label class="label">Start</label>
     <div class="control">
-      <%= date_field_tag(:start_date, filters[:start_date], ajax_options) %>
+      <%= date_field_tag(:start_date, filters[:start_date], filter_options(:start_date, filters)) %>
   </div>
 
     <label class="label">End</label>
     <div class="control">
-      <%= date_field_tag(:end_date, filters[:end_date], ajax_options) %>
+      <%= date_field_tag(:end_date, filters[:end_date], filter_options(:end_date, filters)) %>
     </div>
 </div>

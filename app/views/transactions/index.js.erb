@@ -1,2 +1,4 @@
 var transactions = document.querySelector("#transactions");
 transactions.innerHTML = "<%= j render 'transactions', transactions: @transactions %>";
+var filters = document.querySelector("#transaction-filters");
+filters.innerHTML = "<%= j render 'transaction_filters', filters: @filters %>";

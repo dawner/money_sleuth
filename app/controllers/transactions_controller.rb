@@ -45,13 +45,16 @@ class TransactionsController < ApplicationController
 
     def valid_filters
       filters = params.permit(VALID_FILTERS).to_h.symbolize_keys
-      filters[:start_date] = filter_date(filters[:start_date], (Date.today - 1.month).at_beginning_of_month)
-      filters[:end_date] = filter_date(filters[:end_date], Date.today)
+
+      filters[:start_date] =  filters[:start_date] ? filters[:start_date].to_date : default_start_date(filters)
+      filters[:end_date] = filters[:end_date] ? filters[:end_date].to_date : Date.today
       filters
     end
 
-    def filter_date(date_from_params, default_date)
-      date_from_params ? date_from_params.to_date : default_date
+    def default_start_date(filters)
+      # Default to 1 Jan when category filter applied, and start of previous month when no category filter
+      today = Date.today
+      filters[:category_id] ? today.beginning_of_year : (Date.today - 1.month).at_beginning_of_month
     end
 
     # Use callbacks to share common setup or constraints between actions.
