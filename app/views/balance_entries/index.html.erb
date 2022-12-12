@@ -30,7 +30,7 @@
       <% institution_data[:balance_entries].each do |balance_entry| %>
         <tr>
           <td><%= balance_entry.posted_on %></td>
-          <td><%= balance_entry.account.name %></td>
+          <td><%= link_to balance_entry.account.name, account_path(balance_entry.account_id) %></td>
           <td><%= balance_entry.value.format %></td>
           <td>
             <em>

@@ -7,6 +7,10 @@ require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
+
+import Chart from 'chart.js/auto';
+global.Chart = Chart;
+
 const Tagify = require("@yaireo/tagify")
 window.Tagify = Tagify
 

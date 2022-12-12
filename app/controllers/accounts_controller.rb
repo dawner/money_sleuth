@@ -8,6 +8,9 @@ class AccountsController < ApplicationController
 
   # GET /accounts/1 or /accounts/1.json
   def show
+    balances = @account.balance_entries.select(:posted_on, :value_cents)
+    @balance_labels = balances.map{ |b| b.posted_on.iso8601 }
+    @balance_values = balances.map{ |b| b.value_cents/100 }
   end
 
   # GET /accounts/new

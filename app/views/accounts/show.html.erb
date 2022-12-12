@@ -26,4 +26,23 @@
   <%= @account.institution.name %>
 </p>
 
+<canvas id="balances" width="200px" height="100px" data-labels="<%= @balance_labels %>" data-data="<%= @balance_values %>" ></canvas>
+
 <%= link_to 'Edit', edit_account_path(@account) %>
+
+<script>
+  document.addEventListener('turbolinks:load', () => {
+    var ctx = document.getElementById('balances').getContext('2d');
+    var myChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: JSON.parse(ctx.canvas.dataset.labels),
+        datasets: [{
+          label: 'Balance',
+          fill: true,
+          data: JSON.parse(ctx.canvas.dataset.data),
+        }]
+      },
+    });
+  });
+</script>
