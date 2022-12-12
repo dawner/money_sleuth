@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_30_840201) do
-
+ActiveRecord::Schema[7.0].define(version: 2022_12_12_013752) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -19,8 +18,8 @@ ActiveRecord::Schema.define(version: 2022_09_30_840201) do
     t.string "name"
     t.integer "account_type", default: 0, null: false
     t.bigint "institution_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.boolean "active", default: true
     t.index ["institution_id"], name: "index_accounts_on_institution_id"
   end
@@ -29,8 +28,8 @@ ActiveRecord::Schema.define(version: 2022_09_30_840201) do
     t.date "posted_on"
     t.integer "value_cents", default: 0, null: false
     t.string "value_currency", default: "CAD", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.bigint "account_id"
     t.index ["account_id"], name: "index_balance_entries_on_account_id"
   end
@@ -38,16 +37,16 @@ ActiveRecord::Schema.define(version: 2022_09_30_840201) do
   create_table "categories", force: :cascade do |t|
     t.string "name", null: false
     t.text "keywords", default: [], array: true
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "transaction_type", default: 0
   end
 
   create_table "institutions", force: :cascade do |t|
     t.string "slug", null: false
     t.string "name", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "currency"
     t.text "headers", default: [], array: true
     t.boolean "headers_in_file", default: true
@@ -58,8 +57,8 @@ ActiveRecord::Schema.define(version: 2022_09_30_840201) do
 
   create_table "transaction_batches", force: :cascade do |t|
     t.bigint "institution_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "file"
     t.index ["institution_id"], name: "index_transaction_batches_on_institution_id"
   end
@@ -71,8 +70,8 @@ ActiveRecord::Schema.define(version: 2022_09_30_840201) do
     t.text "description"
     t.integer "status", default: 0, null: false
     t.bigint "category_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.bigint "transaction_batch_id"
     t.index ["category_id"], name: "index_transactions_on_category_id"
     t.index ["transaction_batch_id"], name: "index_transactions_on_transaction_batch_id"
