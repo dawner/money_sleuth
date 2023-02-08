@@ -1,7 +1,7 @@
 class TransactionsController < ApplicationController
   before_action :set_transaction, only: [:update, :destroy]
 
-  VALID_FILTERS = [:category_id, :start_date, :end_date]
+  VALID_FILTERS = [:category_id, :start_date, :end_date, :year, :month]
 
   # GET /transactions
   # GET /transactions.json
@@ -46,9 +46,29 @@ class TransactionsController < ApplicationController
     def valid_filters
       filters = params.permit(VALID_FILTERS).to_h.symbolize_keys
 
-      filters[:start_date] =  filters[:start_date] ? filters[:start_date].to_date : default_start_date(filters)
-      filters[:end_date] = filters[:end_date] ? filters[:end_date].to_date : Date.today
+      filters[:start_date] = start_date(filters)
+      filters[:end_date] = end_date(filters)
       filters
+    end
+
+    def start_date(filters)
+      return filters[:start_date].to_date if filters[:start_date].present?
+
+      if filters[:year]
+        Date.new(filters[:year].to_i, filters[:month]&.to_i || 1, 1)
+      else
+        default_start_date(filters)
+      end
+    end
+
+    def end_date(filters)
+      return filters[:end_date].to_date if filters[:end_date].present?
+
+      if filters[:year]
+        Date.new(filters[:year].to_i, filters[:month]&.to_i || 12, 1).end_of_month
+      else
+        Date.today
+      end
     end
 
     def default_start_date(filters)

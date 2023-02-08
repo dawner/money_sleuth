@@ -1,6 +1,6 @@
 <% income_categories.reverse.each do |category, value| %>
   <tr>
-    <td><%= category.name %></td>
+    <td><%= link_to category.name, transactions_path(category_id: category.id, year: @filters[:year], month: @filters[:month]) %></td>
     <td><%= value.format %></td>
   </tr>
 <% end %>

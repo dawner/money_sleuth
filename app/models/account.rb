@@ -6,7 +6,7 @@ class Account < ApplicationRecord
 
   enum account_type: { bank: 0, investment: 1, credit_card: 2, retirement: 3 }
 
-  LIQUID_TYPES = ['bank', 'investment', 'credit_card']
+  LIQUID_TYPES = ['bank', 'credit_card']
 
   scope :active, -> { where(active: true) }
 
