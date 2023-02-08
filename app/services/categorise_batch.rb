@@ -9,7 +9,7 @@ class CategoriseBatch
       TransactionBatch.transaction do
         csv = read_csv(institution, transaction_batch.file.current_path)
         csv.each do |line|
-          amount = line[:value].is_a?(String) ? line[:value].gsub(/\$|,/, '').to_f : line[:value]
+          amount = get_amount(line, institution)
           next unless amount && amount.nonzero? # Remove transactions without a dollar value
 
           process_line!(line, amount, transaction_batch, institution)
@@ -37,6 +37,19 @@ class CategoriseBatch
     csv
   end
 
+  def get_amount(line, institution)
+    amount = parse_amount(line[:value], institution.expenses_negative)
+    return amount if amount && amount.nonzero?
+
+    parse_amount(line[:expense_value], true)
+  end
+
+  def parse_amount(raw_value, negate_amount)
+    # Strip any $ signs and commas so we can convert to float
+    cleaned_value = raw_value.is_a?(String) ? raw_value.gsub(/\$|,/, '') : raw_value
+    cleaned_value && (cleaned_value.to_f * (negate_amount ? -1 : 1))
+  end
+
   def process_line!(line, amount, transaction_batch, institution)
     # Find first category which has keywords matching the line description
     # TODO definitely need to make this smarter
@@ -44,7 +57,7 @@ class CategoriseBatch
     best_category_match = Category.where('keywords && array[?]', transaction.description.downcase.split).first
     transaction.category =  best_category_match || Category.default
     transaction.posted_on = DateTime.strptime(line[:posted_on], institution.date_format)
-    transaction.value = amount * (institution.expenses_negative ? 1 : -1)
+    transaction.value = amount
     transaction.save!
   end
 end
