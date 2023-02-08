@@ -8,6 +8,21 @@
 <h3>Total value: <u><%= @total_value.format %></u></h3>
 <h3>Liquid value: <u><%= @total_liquid.format %></u></h3>
 <br/>
+<%#  %>
+<section>
+<table>
+  <tbody>
+    <% @account_type_data.each do |account_type, total| %>
+      <tr>
+        <td><%= account_type.titleize %></td>
+        <td><%= total.format %></td>
+        <td><%= ((total/@total_value)*100).round %>%</td>
+      </tr>
+    <% end %>
+
+  </tbody>
+</table>
+<br/>
 
 <table>
   <thead>
@@ -43,3 +58,5 @@
 
   </tbody>
 </table>
+
+
