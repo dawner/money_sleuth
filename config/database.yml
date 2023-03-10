@@ -20,10 +20,13 @@ default: &default
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: <%= ENV['MONEY_SLEUTH_DATABASE_HOST_URL'] %>
+  database: <%= ENV['MONEY_SLEUTH_DATABASE_NAME'] %>
+  username: <%= ENV['MONEY_SLEUTH_DATABASE_USERNAME'] %>
+  password: <%= ENV['MONEY_SLEUTH_DATABASE_PASSWORD'] %>
 
 development:
   <<: *default
-  database: money_sleuth_development
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -82,4 +85,3 @@ production:
   <<: *default
   database: money_sleuth_production
   username: money_sleuth
-  password: <%= ENV['MONEY_SLEUTH_DATABASE_PASSWORD'] %>
