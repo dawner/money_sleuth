@@ -49,6 +49,8 @@
           <td><%= balance_entry.value.format %></td>
           <td>
             <em>
+              <%= link_to 'New', new_balance_entry_path(account_id: balance_entry.account.id) %>
+              |
               <%= link_to 'Delete', balance_entry, method: :delete, data: { confirm: 'Are you sure?' } %>
             </em>
           </td>
