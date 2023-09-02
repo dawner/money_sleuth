@@ -38,23 +38,23 @@ class CategoriseBatch
   end
 
   def get_amount(line, institution)
-    amount = parse_amount(line[:value], institution.expenses_negative)
+    amount = parse_amount(line[:value], institution)
     return amount if amount && amount.nonzero?
 
     parse_amount(line[:expense_value], true)
   end
 
-  def parse_amount(raw_value, negate_amount)
+  def parse_amount(raw_value, institution)
     # Strip any $ signs and commas so we can convert to float
     cleaned_value = raw_value.is_a?(String) ? raw_value.gsub(/\$|,/, '') : raw_value
-    cleaned_value && (cleaned_value.to_f * (negate_amount ? -1 : 1))
+    cleaned_value && (cleaned_value.to_f * (institution.expenses_negative ? 1 : -1))
   end
 
   def process_line!(line, amount, transaction_batch, institution)
     # Find first category which has keywords matching the line description
     # TODO definitely need to make this smarter
     transaction = transaction_batch.transactions.new(line.slice(:posted_on, :description, :value))
-    best_category_match = Category.where('keywords && array[?]', transaction.description.downcase.split).first
+    best_category_match = Category.where('keywords && array[?]', transaction.description.downcase.split).last
     transaction.category =  best_category_match || Category.default
     transaction.posted_on = DateTime.strptime(line[:posted_on], institution.date_format)
     transaction.value = amount

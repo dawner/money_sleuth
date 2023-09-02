@@ -41,14 +41,14 @@
   </div>
 
   <div class="field">
-    <%= form.label :expenses_negative %>
+    <%= form.label 'Expenses are negative or in debit column' %>
 
     <%= form.label :expenses_negative_true do %>
       <%= form.radio_button :expenses_negative, true %>
       True
     <% end %>
 
-    <%= form.label :expenses_negative_false do %>
+    <%= form.label ':expenses_negative_false' do %>
         <%= form.radio_button :expenses_negative, false %>
         False
     <% end %>

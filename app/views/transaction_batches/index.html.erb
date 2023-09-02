@@ -9,7 +9,8 @@
       <th>Period</th>
       <th>Institution</th>
       <th>Upload ref</th>
-      <th colspan="3"></th>
+      <th colspan="2"></th>
+      <th>Uploaded on</th>
     </tr>
   </thead>
 
@@ -23,6 +24,7 @@
         <td><%= File.basename(transaction_batch.file.path) %></td>
         <td><%= link_to 'Show', transaction_batch %></td>
         <td><%= link_to 'Destroy', transaction_batch, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= l(transaction_batch.created_at, format: :short_date) %></td>
       </tr>
     <% end %>
   </tbody>
