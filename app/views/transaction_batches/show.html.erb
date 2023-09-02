@@ -12,6 +12,16 @@
   <%= @transaction_batch.institution.name %>
 </p>
 
+<p>
+  <strong>Period start:</strong>
+  <%= @transaction_batch.period_start %>
+</p>
+
+<p>
+  <strong>Period end:</strong>
+  <%= @transaction_batch.period_end %>
+</p>
+
 <%= render 'transactions/transactions_table', transactions: @transaction_batch.transactions %>
 
 <p>

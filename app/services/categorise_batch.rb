@@ -14,6 +14,7 @@ class CategoriseBatch
 
           process_line!(line, amount, transaction_batch, institution)
         end
+        update_batch_period!(transaction_batch)
       end
     else
       context.fail!({errors: transaction_batch.errors})
@@ -59,5 +60,12 @@ class CategoriseBatch
     transaction.posted_on = DateTime.strptime(line[:posted_on], institution.date_format)
     transaction.value = amount
     transaction.save!
+  end
+
+  def update_batch_period!(transaction_batch)
+    max_date = transaction_batch.transactions.maximum(:posted_on)
+    min_date = transaction_batch.transactions.minimum(:posted_on)
+
+    transaction_batch.update!(period_start: min_date, period_end: max_date)
   end
 end

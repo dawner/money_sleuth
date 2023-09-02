@@ -18,8 +18,9 @@
     <% @transaction_batches.each do |transaction_batch| %>
       <tr>
         <td>
-          <%= l(transaction_batch.transactions.minimum(:posted_on), format: :short, default: '-')%> -
-          <%= l(transaction_batch.transactions.maximum(:posted_on), format: :short, default: '-')%></td>
+          <%= transaction_batch.period_start && l(transaction_batch.period_start, format: :short) %> -
+          <%= transaction_batch.period_end && l(transaction_batch.period_end, format: :short) %>
+        </td>
         <td><%= transaction_batch.institution.name %></td>
         <td><%= File.basename(transaction_batch.file.path) %></td>
         <td><%= link_to 'Show', transaction_batch %></td>

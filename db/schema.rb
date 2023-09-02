@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_12_013752) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_02_150455) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -60,6 +60,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_12_013752) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "file"
+    t.date "period_start"
+    t.date "period_end"
     t.index ["institution_id"], name: "index_transaction_batches_on_institution_id"
   end
 
