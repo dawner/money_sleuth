@@ -1,16 +1,19 @@
 <% content_for(:page_title) { 'Balances' } %>
 
 <p id="notice"><%= notice %></p>
-<%= link_to 'Back', root_path %>
- |
-<%= link_to 'New Balance Entry', new_balance_entry_path %>
+<%= link_to root_path, class: 'icon' do %>
+  <i class="fas fa-chevron-left">Back</i>
+<% end %>
 <p>---------</p>
 <h3>Total value: <u><%= @total_value.format %></u></h3>
 <h3>Liquid value: <u><%= @total_liquid.format %></u></h3>
+<%= link_to 'New Balance Entry', new_balance_entry_path, class: 'button is-link'%>
 <br/>
+<br/>
+
 <%#  %>
 <section>
-<table>
+<table class="table">
   <tbody>
     <% @account_type_data.each do |account_type, total| %>
       <tr>
@@ -24,7 +27,7 @@
 </table>
 <br/>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>Posted on</th>
@@ -49,9 +52,12 @@
           <td><%= balance_entry.value.format %></td>
           <td>
             <em>
-              <%= link_to 'New', new_balance_entry_path(account_id: balance_entry.account.id) %>
-              |
-              <%= link_to 'Delete', balance_entry, method: :delete, data: { confirm: 'Are you sure?' } %>
+              <%= link_to new_balance_entry_path(account_id: balance_entry.account.id), title: 'Add new entry', class: 'icon has-text-success' do %>
+                <i class="fas fa-plus"></i>
+              <% end %>
+              <%= link_to balance_entry, { method: :delete,  title: 'Delete last entry', class: 'icon has-text-danger', data: { confirm: 'Are you sure?' }} do %>
+                <i class="fas fa-trash"></i>
+              <% end %>
             </em>
           </td>
         </tr>

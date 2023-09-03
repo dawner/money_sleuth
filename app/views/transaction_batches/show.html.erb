@@ -3,7 +3,6 @@
   <li><%= link_to 'Statements', transaction_batches_path %></li>
   <li class="is-active"><a href="#" aria-current="page"><%= @transaction_batch.institution.name%></a></li>
 <% end %>
-<%= link_to 'Upload new statement', new_transaction_batch_path %>
 
 <p id="notice"><%= notice %></p>
 
@@ -22,6 +21,9 @@
   <%= @transaction_batch.period_end %>
 </p>
 
+<%= link_to 'Upload new statement', new_transaction_batch_path, class: 'button is-link' %>
+<br>
+<br>
 <%= render 'transactions/transactions_table', transactions: @transaction_batch.transactions %>
 
 <p>

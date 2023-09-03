@@ -1,26 +1,34 @@
 <% content_for(:page_title) { 'Accounts' } %>
 
 <p id="notice"><%= notice %></p>
-<%= link_to 'New Account', new_account_path %>
-
+<%= link_to 'New Account', new_account_path, class: 'button is-link' %>
+<br><br>
 <% @accounts_by_institution.each do |institution_name, accounts| %>
   <h3><%= institution_name %></h3>
-  <table>
+  <table class="table">
     <thead>
       <tr>
         <th>Name</th>
         <th>Account type</th>
-        <th colspan="3"></th>
+        <th colspan="2"></th>
       </tr>
     </thead>
     <tbody>
       <% accounts.each do |account| %>
         <tr>
-          <td><%= account.name %></td>
+          <td><%= link_to account.name, account %></td>
           <td><%= account.account_type.humanize %></td>
-          <td><%= link_to 'Show', account %></td>
-          <td><%= link_to 'Edit', edit_account_path(account) %></td>
-          <td><%= link_to 'Destroy', account, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
+          <td>
+            <%= link_to edit_account_path(account), title: 'Edit account', class: 'icon has-text-info' do %>
+              <i class="fas fa-pen"></i>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to account, { method: :delete,  title: 'Delete account', class: 'icon has-text-danger', data: { confirm: 'Are you sure?' }} do %>
+              <i class="fas fa-trash"></i>
+            <% end %>
+          </td>
         </tr>
       <% end %>
     </tbody>

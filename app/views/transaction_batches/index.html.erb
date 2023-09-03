@@ -1,9 +1,10 @@
 <% content_for(:page_title) { 'Statements' } %>
 
 <p id="notice"><%= notice %></p>
-<%= link_to 'Upload new statement', new_transaction_batch_path %>
-
-<table>
+<%= link_to 'Upload new statement', new_transaction_batch_path, class: 'button is-link' %>
+<br>
+<br>
+<table class="table">
   <thead>
     <tr>
       <th>Period</th>
@@ -23,8 +24,16 @@
         </td>
         <td><%= transaction_batch.institution.name %></td>
         <td><%= File.basename(transaction_batch.file.path) %></td>
-        <td><%= link_to 'Show', transaction_batch %></td>
-        <td><%= link_to 'Destroy', transaction_batch, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+        <%= link_to transaction_batch, title: 'Edit batch', class: 'icon has-text-info' do %>
+          <i class="fas fa-pen"></i>
+        <% end %>
+      </td>
+        <td>
+          <%= link_to transaction_batch, { method: :delete,  title: 'Delete batch', class: 'icon has-text-danger', data: { confirm: 'Are you sure?' }} do %>
+            <i class="fas fa-trash"></i>
+          <% end %>
+        </td>
         <td><%= l(transaction_batch.created_at, format: :short_date) %></td>
       </tr>
     <% end %>
