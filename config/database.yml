@@ -20,7 +20,7 @@ default: &default
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  host: <%= ENV['MONEY_SLEUTH_DATABASE_HOST_URL'] %>
+  host: <%= ENV['MONEY_SLEUTH_DATABASE_HOST'] %>
   database: <%= ENV['MONEY_SLEUTH_DATABASE_NAME'] %>
   username: <%= ENV['MONEY_SLEUTH_DATABASE_USERNAME'] %>
   password: <%= ENV['MONEY_SLEUTH_DATABASE_PASSWORD'] %>
