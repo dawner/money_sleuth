@@ -5,8 +5,8 @@ class TransactionBatchesController < ApplicationController
   # GET /transaction_batches.json
   def index
     @transaction_batches = TransactionBatch.all
-      .includes(:transactions, :institution)
-      .order('transactions.posted_on')
+      .includes(:account)
+      .order(:period_end)
   end
 
   # GET /transaction_batches/1
@@ -36,6 +36,18 @@ class TransactionBatchesController < ApplicationController
     end
   end
 
+  # PATCH/PUT /categories/1
+  # PATCH/PUT /categories/1.json
+  def update
+    respond_to do |format|
+      if @transaction_batch.update(transaction_batch_update_params)
+        format.js { render json: @transaction_batch, status: :ok } #TODO toast notification of success/error
+      else
+        format.js { render json: @transaction_batch.errors.full_messages, status: :unprocessable_entity }
+      end
+    end
+  end
+
   # DELETE /transaction_batches/1
   # DELETE /transaction_batches/1.json
   def destroy
@@ -54,9 +66,10 @@ class TransactionBatchesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def transaction_batch_create_params
-      params.require(:transaction_batch).permit(:file, :file_cache, :institution_id)
+      params.require(:transaction_batch).permit(:file, :file_cache, :account_id)
     end
+
     def transaction_batch_update_params
-      params.require(:transaction_batch).permit(:institution_id)
+      params.require(:transaction_batch).permit(:account_id)
     end
 end

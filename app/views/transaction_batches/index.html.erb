@@ -8,7 +8,7 @@
   <thead>
     <tr>
       <th>Period</th>
-      <th>Institution</th>
+      <th>Account</th>
       <th>Upload ref</th>
       <th colspan="2"></th>
       <th>Uploaded on</th>
@@ -22,7 +22,7 @@
           <%= transaction_batch.period_start && l(transaction_batch.period_start, format: :short) %> -
           <%= transaction_batch.period_end && l(transaction_batch.period_end, format: :short) %>
         </td>
-        <td><%= transaction_batch.institution.name %></td>
+        <td><%= transaction_batch.account.name %></td>
         <td><%= File.basename(transaction_batch.file.path) %></td>
         <td>
         <%= link_to transaction_batch, title: 'Edit batch', class: 'icon has-text-info' do %>

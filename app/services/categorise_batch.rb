@@ -3,7 +3,7 @@ class CategoriseBatch
 
   def call
     transaction_batch = context.transaction_batch
-    institution = transaction_batch.institution
+    institution = transaction_batch.account.institution
 
     if transaction_batch.valid?
       TransactionBatch.transaction do
