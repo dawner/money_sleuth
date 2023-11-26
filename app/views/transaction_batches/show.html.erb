@@ -1,17 +1,29 @@
 <% content_for(:page_title) { 'Statements' } %>
 <% content_for(:breadcrumbs)  do %>
   <li><%= link_to 'Statements', transaction_batches_path %></li>
-  <li class="is-active"><a href="#" aria-current="page"><%= @transaction_batch.institution.name%></a></li>
+  <li class="is-active"><a href="#" aria-current="page"><%= @transaction_batch.account.name%></a></li>
 <% end %>
-<%= link_to 'Upload new statement', new_transaction_batch_path %>
 
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Institution:</strong>
-  <%= @transaction_batch.institution.name %>
+  <strong>Account:</strong>
+  <%= @transaction_batch.account.name %>
 </p>
 
+<p>
+  <strong>Period start:</strong>
+  <%= @transaction_batch.period_start %>
+</p>
+
+<p>
+  <strong>Period end:</strong>
+  <%= @transaction_batch.period_end %>
+</p>
+
+<%= link_to 'Upload new statement', new_transaction_batch_path, class: 'button is-link' %>
+<br>
+<br>
 <%= render 'transactions/transactions_table', transactions: @transaction_batch.transactions %>
 
 <p>

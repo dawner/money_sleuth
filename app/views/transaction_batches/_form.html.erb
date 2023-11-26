@@ -11,7 +11,7 @@
     </div>
   <% end %>
 
-  <%= form.collection_select :institution_id, Institution.all, :id, :name %>
+  <%= form.collection_select :account_id, Account.order(:name), :id, :name %>
 
   <div class="field">
     <%= form.label :file %>

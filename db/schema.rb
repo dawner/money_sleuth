@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_12_013752) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_26_987204) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -56,11 +56,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_12_013752) do
   end
 
   create_table "transaction_batches", force: :cascade do |t|
-    t.bigint "institution_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "file"
-    t.index ["institution_id"], name: "index_transaction_batches_on_institution_id"
+    t.date "period_start"
+    t.date "period_end"
+    t.bigint "account_id"
+    t.index ["account_id"], name: "index_transaction_batches_on_account_id"
   end
 
   create_table "transactions", force: :cascade do |t|
@@ -79,7 +81,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_12_013752) do
 
   add_foreign_key "accounts", "institutions"
   add_foreign_key "balance_entries", "accounts"
-  add_foreign_key "transaction_batches", "institutions"
+  add_foreign_key "transaction_batches", "accounts"
   add_foreign_key "transactions", "categories"
   add_foreign_key "transactions", "transaction_batches"
 end

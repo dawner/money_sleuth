@@ -2,7 +2,7 @@
     <tr>
       <td><%= l(transaction.posted_on) %></td>
       <td><%= transaction.value.format %></td>
-      <td>
+      <td class="select">
         <% ajax_options = { data: { remote: true, method: :put, url: transaction_path(id: transaction.id)}} %>
         <%= form_with model: transaction do |f| %>
           <%= f.grouped_collection_select :category_id, all_categories_grouped, :categories, :name, :id, :name, {}, ajax_options %>
@@ -10,9 +10,9 @@
       </td>
       <td><%= transaction.description %></td>
       <td>
-        <em>
-          <%= link_to 'Delete', transaction, method: :delete, data: { confirm: 'Are you sure?' } %>
-        </em>
+        <%= link_to transaction, { method: :delete,  title: 'Delete batch', class: 'icon has-text-danger', data: { confirm: 'Are you sure?' }} do %>
+          <i class="fas fa-trash"></i>
+        <% end %>
       </td>
     </tr>
 <% end %>

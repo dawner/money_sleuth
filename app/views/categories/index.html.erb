@@ -1,9 +1,9 @@
 <% content_for(:page_title) { 'Categories' } %>
 
 <p id="notice"><%= notice %></p>
-<%= link_to 'New Category', new_category_path %>
-
-<table>
+<%= link_to 'New Category', new_category_path, class: 'button is-link' %>
+<br><br>
+<table class="table">
   <thead>
     <tr>
       <th>Name</th>
@@ -16,12 +16,19 @@
   <tbody>
     <% @categories.each do |category| %>
       <tr>
-        <td><%= category.name %></td>
+        <td><%= link_to category.name, category %></td>
         <td><%= category.transaction_type.humanize %></td>
         <td><%= category.keywords %></td>
-        <td><%= link_to 'Show', category %></td>
-        <td><%= link_to 'Edit', edit_category_path(category) %></td>
-        <td><%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <%= link_to edit_category_path(category), title: 'Edit category', class: 'icon has-text-info' do %>
+            <i class="fas fa-pen"></i>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to category, { method: :delete,  title: 'Delete category', class: 'icon has-text-danger', data: { confirm: 'Are you sure?' }} do %>
+            <i class="fas fa-trash"></i>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>

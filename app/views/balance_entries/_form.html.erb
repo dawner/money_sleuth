@@ -11,6 +11,13 @@
     </div>
   <% end %>
 
+  <% ajax_options = { data: { remote: true, method: :get, url: new_balance_entry_path }} %>
+  <%= form.collection_select :account_id, Account.active.order(:institution_id), :id, :name, { selected: @previous_balance_entry&.account_id }, ajax_options %>
+  <div id="current_balance">
+    Current balance: <%= @previous_balance_entry&.value&.format %>
+  </div>
+  <br>
+
   <div class="field">
     <%= form.label :posted_on %>
     <%= form.date_select :posted_on %>
@@ -20,8 +27,6 @@
     <%= form.label :value %>
     <%= form.number_field :value, value: number_to_currency(form.object.value.to_f, delimiter: '', unit: ''), step: 0.01 %>
   </div>
-
-  <%= form.collection_select :account_id, Account.active.order(:institution_id), :id, :name %>
 
   <br>
   <div class="actions">

@@ -30,7 +30,15 @@ class BalanceEntriesController < ApplicationController
 
   # GET /balance_entries/new
   def new
-    @balance_entry = BalanceEntry.new
+    @account_id = params[:account_id] || params[:balance_entry] && params[:balance_entry][:account_id]
+    @previous_balance_entry = BalanceEntry.where(account_id: @account_id).order(posted_on: :desc).first if @account_id
+    @new_balance_entry = BalanceEntry.new
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
+
   end
 
   # GET /balance_entries/1/edit

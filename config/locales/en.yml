@@ -35,3 +35,7 @@ en:
     formats:
       default: "%d/%m/%Y"
       short: "%b %Y"
+  time:
+    formats:
+      default: "%d/%m/%Y %H:%M"
+      short_date: "%d/%m/%Y"

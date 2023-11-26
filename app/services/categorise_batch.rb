@@ -3,7 +3,7 @@ class CategoriseBatch
 
   def call
     transaction_batch = context.transaction_batch
-    institution = transaction_batch.institution
+    institution = transaction_batch.account.institution
 
     if transaction_batch.valid?
       TransactionBatch.transaction do
@@ -14,6 +14,7 @@ class CategoriseBatch
 
           process_line!(line, amount, transaction_batch, institution)
         end
+        update_batch_period!(transaction_batch)
       end
     else
       context.fail!({errors: transaction_batch.errors})
@@ -38,26 +39,33 @@ class CategoriseBatch
   end
 
   def get_amount(line, institution)
-    amount = parse_amount(line[:value], institution.expenses_negative)
+    amount = parse_amount(line[:value], institution)
     return amount if amount && amount.nonzero?
 
-    parse_amount(line[:expense_value], true)
+    parse_amount(line[:expense_value], institution)
   end
 
-  def parse_amount(raw_value, negate_amount)
+  def parse_amount(raw_value, institution)
     # Strip any $ signs and commas so we can convert to float
     cleaned_value = raw_value.is_a?(String) ? raw_value.gsub(/\$|,/, '') : raw_value
-    cleaned_value && (cleaned_value.to_f * (negate_amount ? -1 : 1))
+    cleaned_value && (cleaned_value.to_f * (institution.expenses_negative ? 1 : -1))
   end
 
   def process_line!(line, amount, transaction_batch, institution)
     # Find first category which has keywords matching the line description
     # TODO definitely need to make this smarter
     transaction = transaction_batch.transactions.new(line.slice(:posted_on, :description, :value))
-    best_category_match = Category.where('keywords && array[?]', transaction.description.downcase.split).first
+    best_category_match = Category.where('keywords && array[?]', transaction.description.downcase.split).last
     transaction.category =  best_category_match || Category.default
     transaction.posted_on = DateTime.strptime(line[:posted_on], institution.date_format)
     transaction.value = amount
     transaction.save!
+  end
+
+  def update_batch_period!(transaction_batch)
+    max_date = transaction_batch.transactions.maximum(:posted_on)
+    min_date = transaction_batch.transactions.minimum(:posted_on)
+
+    transaction_batch.update!(period_start: min_date, period_end: max_date)
   end
 end

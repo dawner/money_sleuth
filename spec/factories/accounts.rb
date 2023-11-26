@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :account do
-    name { "MyString" }
-    account_type { 1 }
-    institution { nil }
+    name { "Account Name" }
+    account_type { 0 }
+    institution
   end
 end

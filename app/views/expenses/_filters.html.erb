@@ -2,12 +2,12 @@
 
 <div class="field is-horizontal">
   <label class="label">Year</label>
-    <div class="control">
+    <div class="control select">
       <%= select_tag :year, options_for_select(@year_options, @filters[:year]), ajax_options%>
     </div>
 
     <label class="label">Month</label>
-    <div class="control">
+    <div class="control select">
       <%= select_tag :month,  options_for_select((1..12).map {|m| [Date::MONTHNAMES[m], m]}, @filters[:month]), ajax_options.merge(include_blank: "Select month") %>
     </div>
 </div>
