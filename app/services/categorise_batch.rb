@@ -42,7 +42,7 @@ class CategoriseBatch
     amount = parse_amount(line[:value], institution)
     return amount if amount && amount.nonzero?
 
-    parse_amount(line[:expense_value], true)
+    parse_amount(line[:expense_value], institution)
   end
 
   def parse_amount(raw_value, institution)
