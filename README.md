@@ -1,11 +1,11 @@
 # MoneySleuth
 
-A simple tool for managing income, expenses & balances across multiple countries. Includes customizable support for importing statements institutions and categorise transactions to generate reports.
+A simple tool for managing income, expenses & balances. Includes customizable support for importing statements institutions and categorise transactions to generate reports.
 
 ### Prerequisites
 
-- Ruby 2.7.1
-- Rails 6.0.2
+- Docker
+- Docker compose
 
 ### Installation
 
@@ -13,13 +13,23 @@ A simple tool for managing income, expenses & balances across multiple countries
    `git clone git@github.com/dawner/money_sleuth.git`
 
 2. Create and setup the database
+   `docker-compose build`
 
-```
-bundle exec rake db:create
-bundle exec rake db:setup
-```
-
-4. Start the Rails server
-   `bundle exec rails s`
+3. Start the application
+   `docker-compose up`
 
 You can now visit the site with the URL http://localhost:3000
+
+4. To run migrations or rake commands
+   ```
+   docker exec -it money_sleuth-web-1 /bin/bash
+   rake db:migrate
+   ```
+
+### Testing
+
+Run test suite with
+```
+   docker exec -it money_sleuth-web-1 /bin/bash
+   rspec
+```

@@ -7,17 +7,17 @@ services:
     ports:
       - "3005:3000"
     networks:
-      - myapp-network
+      - money-sleuth
   db:
     image: postgres
     volumes:
       - ./tmp/db:/var/lib/postgresql/data
     environment:
-      POSTGRES_PASSWORD: password
+      POSTGRES_PASSWORD: <%= ENV['MONEY_SLEUTH_DATABASE_PASSWORD'] %>
     ports:
       - "5433:5432"
     networks:
-      - myapp-network
+      - money-sleuth
 
 networks:
-  myapp-network:
+  money-sleuth:

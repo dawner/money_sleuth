@@ -34,4 +34,4 @@ yarn-debug.log*
 /public/uploads
 
 # Don't commit env variables
-.env
+.env*
