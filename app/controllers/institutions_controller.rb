@@ -14,7 +14,7 @@ class InstitutionsController < ApplicationController
 
   # GET /institutions/new
   def new
-    @institution = Institution.new
+    @institution = Institution.new(headers: Institution::REQUIRED_HEADERS)
   end
 
   # GET /institutions/1/edit

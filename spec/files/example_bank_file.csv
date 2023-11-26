@@ -1,6 +1,5 @@
 Date,Description,Amount
-01-01-2020,Netflix,9.99
-02-01-2020,Burger,14.90
-21-01-2020,Cafe Robinson,4.50
-21-01-2020,Clothing,49.90
-31-01-2020,Rent,1200
+01/02/2020,Robinson Coffee,-4.50
+01/15/2020,BlankLine,0.00
+01/15/2020,Refund,7.50
+01/31/2020,Rent,-1200

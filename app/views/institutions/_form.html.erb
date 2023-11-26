@@ -24,6 +24,11 @@
   <div class="field">
     <%= form.label :headers %>
     <input name="headers-tags" value=<%= institution.headers.join(',') %>>
+    <p class="help has-text-grey">
+      Input headers in order they appear in CSV headers.<br>
+      - Must always container headers: <%= Institution::REQUIRED_HEADERS.join(', ')  %><br>
+      - For CSV formats with 2 value columns for debit/credit use "value" for credits and "value_expenses" keyword for debits
+    </p>
   </div>
 
   <div class="field">

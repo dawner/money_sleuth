@@ -8,6 +8,9 @@
   <thead>
     <tr>
       <th>Name</th>
+      <th>Headers</th>
+      <th>Headers in file</th>
+      <th>Negative expenses</th>
       <th colspan="2"></th>
     </tr>
   </thead>
@@ -16,6 +19,21 @@
     <% @institutions.each do |institution| %>
       <tr>
         <td><%= link_to institution.name, institution %></td>
+        <td><%= institution.headers %></td>
+        <td>
+          <% if institution.headers_in_file %>
+            <div class="icon has-text-success"><i class="fas fa-square-check"></i></div>
+          <% else %>
+            <div class="icon has-text-danger"><i class="fas fa-square-xmark"></i></div>
+          <% end %>
+        </td>
+        <td>
+          <% if institution.expenses_negative %>
+            <div class="icon has-text-success"><i class="fas fa-square-check"></i></div>
+          <% else %>
+            <div class="icon has-text-danger"><i class="fas fa-square-xmark"></i></div>
+          <% end %>
+        </td>
         <td>
           <%= link_to edit_institution_path(institution), title: 'Edit institution', class: 'icon has-text-info' do %>
             <i class="fas fa-pen"></i>
