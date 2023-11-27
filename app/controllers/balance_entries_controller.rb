@@ -1,5 +1,5 @@
 class BalanceEntriesController < ApplicationController
-  before_action :set_balance_entry, only: %i[ show edit update destroy ]
+  before_action :set_balance_entry, only: %i[ edit update destroy ]
 
   # GET /balance_entries or /balance_entries.json
   def index
@@ -32,7 +32,7 @@ class BalanceEntriesController < ApplicationController
   def new
     @account_id = params[:account_id] || params[:balance_entry] && params[:balance_entry][:account_id]
     @previous_balance_entry = BalanceEntry.where(account_id: @account_id).order(posted_on: :desc).first if @account_id
-    @new_balance_entry = BalanceEntry.new
+    @balance_entry = BalanceEntry.new
 
     respond_to do |format|
       format.html
@@ -48,7 +48,6 @@ class BalanceEntriesController < ApplicationController
   # POST /balance_entries or /balance_entries.json
   def create
     @balance_entry = BalanceEntry.new(balance_entry_params)
-
     respond_to do |format|
       if @balance_entry.save
         format.html { redirect_to balance_entries_url, notice: "Balance entry was successfully created." }
