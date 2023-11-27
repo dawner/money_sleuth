@@ -22,11 +22,13 @@ RSpec.describe "/accounts", type: :request do
   let(:invalid_attributes) {
     skip("Add a hash of attributes invalid for your model")
   }
+  let(:authorization){ ActionController::HttpAuthentication::Basic.encode_credentials("admin", ENV['BASIC_AUTH_ADMIN_PASSWORD'])}
+  let(:headers){{ 'HTTP_AUTHORIZATION' => authorization}}
 
   describe "GET /index" do
     it "renders a successful response" do
       Account.create! valid_attributes
-      get accounts_url
+      get accounts_url, headers: headers
       expect(response).to be_successful
     end
   end
@@ -34,14 +36,14 @@ RSpec.describe "/accounts", type: :request do
   describe "GET /show" do
     it "renders a successful response" do
       account = Account.create! valid_attributes
-      get account_url(account)
+      get account_url(account), headers: headers
       expect(response).to be_successful
     end
   end
 
   describe "GET /new" do
     it "renders a successful response" do
-      get new_account_url
+      get new_account_url, headers: headers
       expect(response).to be_successful
     end
   end
@@ -49,7 +51,7 @@ RSpec.describe "/accounts", type: :request do
   describe "GET /edit" do
     it "render a successful response" do
       account = Account.create! valid_attributes
-      get edit_account_url(account)
+      get edit_account_url(account), headers: headers
       expect(response).to be_successful
     end
   end
@@ -58,7 +60,7 @@ RSpec.describe "/accounts", type: :request do
     context "with valid parameters" do
       it "creates a new Account" do
         expect {
-          post accounts_url, params: { account: valid_attributes }
+          post accounts_url, params: { account: valid_attributes }, headers: headers
         }.to change(Account, :count).by(1)
       end
 
@@ -71,12 +73,12 @@ RSpec.describe "/accounts", type: :request do
     context "with invalid parameters" do
       it "does not create a new Account" do
         expect {
-          post accounts_url, params: { account: invalid_attributes }
+          post accounts_url, params: { account: invalid_attributes }, headers: headers
         }.to change(Account, :count).by(0)
       end
 
       it "renders a successful response (i.e. to display the 'new' template)" do
-        post accounts_url, params: { account: invalid_attributes }
+        post accounts_url, params: { account: invalid_attributes }, headers: headers
         expect(response).to be_successful
       end
     end
@@ -90,14 +92,14 @@ RSpec.describe "/accounts", type: :request do
 
       it "updates the requested account" do
         account = Account.create! valid_attributes
-        patch account_url(account), params: { account: new_attributes }
+        patch account_url(account), params: { account: new_attributes }, headers: headers
         account.reload
         skip("Add assertions for updated state")
       end
 
       it "redirects to the account" do
         account = Account.create! valid_attributes
-        patch account_url(account), params: { account: new_attributes }
+        patch account_url(account), params: { account: new_attributes }, headers: headers
         account.reload
         expect(response).to redirect_to(account_url(account))
       end
@@ -106,7 +108,7 @@ RSpec.describe "/accounts", type: :request do
     context "with invalid parameters" do
       it "renders a successful response (i.e. to display the 'edit' template)" do
         account = Account.create! valid_attributes
-        patch account_url(account), params: { account: invalid_attributes }
+        patch account_url(account), params: { account: invalid_attributes }, headers: headers
         expect(response).to be_successful
       end
     end
@@ -116,13 +118,13 @@ RSpec.describe "/accounts", type: :request do
     it "destroys the requested account" do
       account = Account.create! valid_attributes
       expect {
-        delete account_url(account)
+        delete account_url(account), headers: headers
       }.to change(Account, :count).by(-1)
     end
 
     it "redirects to the accounts list" do
       account = Account.create! valid_attributes
-      delete account_url(account)
+      delete account_url(account), headers: headers
       expect(response).to redirect_to(accounts_url)
     end
   end
