@@ -1,37 +1,37 @@
  require 'rails_helper'
 
 RSpec.describe "/institutions", type: :request do
-  let(:valid_attributes) { { slug: "institution", name: "Top institution" } }
+  include RequestHelper
 
-  let(:invalid_attributes) { { slug: nil, name: nil } }
+  let(:institution) { create(:institution) }
+
+  let(:valid_attributes) {{ name: 'Kiwibank', slug: 'kiwibank', headers_in_file: true, date_format: '%m/%d/%Y', expenses_negative: true, headers: Institution::REQUIRED_HEADERS }}
+  let(:invalid_attributes) { { name: '' } }
 
   describe "GET /index" do
     it "renders a successful response" do
-      create(:institution)
-      get institutions_url
+      get institutions_url, headers: valid_auth_header
       expect(response).to be_successful
     end
   end
 
   describe "GET /show" do
     it "renders a successful response" do
-      institution = create(:institution)
-      get institution_url(institution)
+      get institution_url(institution), headers: valid_auth_header
       expect(response).to be_successful
     end
   end
 
   describe "GET /new" do
     it "renders a successful response" do
-      get new_institution_url
+      get new_institution_url, headers: valid_auth_header
       expect(response).to be_successful
     end
   end
 
   describe "GET /edit" do
     it "render a successful response" do
-      institution = create(:institution)
-      get edit_institution_url(institution)
+      get edit_institution_url(institution), headers: valid_auth_header
       expect(response).to be_successful
     end
   end
@@ -40,12 +40,12 @@ RSpec.describe "/institutions", type: :request do
     context "with valid parameters" do
       it "creates a new Institution" do
         expect {
-          post institutions_url, params: { institution: valid_attributes }
+          post institutions_url, params: { institution: valid_attributes }, headers: valid_auth_header
         }.to change(Institution, :count).by(1)
       end
 
       it "redirects to the created institution" do
-        post institutions_url, params: { institution: valid_attributes }
+        post institutions_url, params: { institution: valid_attributes }, headers: valid_auth_header
         expect(response).to redirect_to(institution_url(Institution.last))
       end
     end
@@ -53,12 +53,12 @@ RSpec.describe "/institutions", type: :request do
     context "with invalid parameters" do
       it "does not create a new Institution" do
         expect {
-          post institutions_url, params: { institution: invalid_attributes }
+          post institutions_url, params: { institution: invalid_attributes }, headers: valid_auth_header
         }.to change(Institution, :count).by(0)
       end
 
       it "renders a successful response (i.e. to display the 'new' template)" do
-        post institutions_url, params: { institution: invalid_attributes }
+        post institutions_url, params: { institution: invalid_attributes }, headers: valid_auth_header
         expect(response).to be_successful
       end
     end
@@ -69,16 +69,14 @@ RSpec.describe "/institutions", type: :request do
       let(:new_attributes) { { slug: "other_institution", name: "Institution Number 2" } }
 
       it "updates the requested institution" do
-        institution = create(:institution)
-        patch institution_url(institution), params: { institution: new_attributes }
+        patch institution_url(institution), params: { institution: new_attributes }, headers: valid_auth_header
         institution.reload
         institution.slug == 'other_institution'
         institution.name == 'Institution Number 2'
       end
 
       it "redirects to the institution" do
-        institution = create(:institution)
-        patch institution_url(institution), params: { institution: new_attributes }
+        patch institution_url(institution), params: { institution: new_attributes }, headers: valid_auth_header
         institution.reload
         expect(response).to redirect_to(institution_url(institution))
       end
@@ -86,8 +84,7 @@ RSpec.describe "/institutions", type: :request do
 
     context "with invalid parameters" do
       it "renders a successful response (i.e. to display the 'edit' template)" do
-        institution = create(:institution)
-        patch institution_url(institution), params: { institution: invalid_attributes }
+        patch institution_url(institution), params: { institution: invalid_attributes }, headers: valid_auth_header
         expect(response).to be_successful
       end
     end
@@ -95,15 +92,14 @@ RSpec.describe "/institutions", type: :request do
 
   describe "DELETE /destroy" do
     it "destroys the requested institution" do
-      institution = create(:institution)
-      expect {
-        delete institution_url(institution)
-      }.to change(Institution, :count).by(-1)
+      delete institution_url(institution), headers: valid_auth_header
+      expect(Institution.count).to eq(0)
+      # expect {
+      # }.to change(Institution, :count).by(-1)
     end
 
     it "redirects to the institutions list" do
-      institution = create(:institution)
-      delete institution_url(institution)
+      delete institution_url(institution), headers: valid_auth_header
       expect(response).to redirect_to(institutions_url)
     end
   end

@@ -24,26 +24,14 @@ class TransactionBatchesController < ApplicationController
   def create
     @transaction_batch = TransactionBatch.new(transaction_batch_create_params)
 
-    result = CategoriseBatch.call({ transaction_batch: @transaction_batch })
+    result = CategoriseBatch.call({ transaction_batch: @transaction_batch }) if @transaction_batch.valid?
     respond_to do |format|
-      if result.success? && @transaction_batch.save
+      if result && result.success? && @transaction_batch.save
         format.html { redirect_to @transaction_batch, notice: 'Transaction batch was successfully created.' }
         format.json { render :show, status: :created, location: @transaction_batch }
       else
         format.html { render :new }
         format.json { render json: result.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /categories/1
-  # PATCH/PUT /categories/1.json
-  def update
-    respond_to do |format|
-      if @transaction_batch.update(transaction_batch_update_params)
-        format.js { render json: @transaction_batch, status: :ok } #TODO toast notification of success/error
-      else
-        format.js { render json: @transaction_batch.errors.full_messages, status: :unprocessable_entity }
       end
     end
   end
