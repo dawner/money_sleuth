@@ -31,7 +31,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 # Support money and currency fields
 gem 'money-rails', '~>1.12'
 # File upload support
-gem 'carrierwave', '~> 2.1'
+gem 'carrierwave', '~> 2.2'
 # More efficient CSV processing
 gem 'smarter_csv','~>1.4'
 # Simple service object handling
