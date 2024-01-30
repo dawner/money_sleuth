@@ -13,7 +13,7 @@ services:
     volumes:
       - ./tmp/db:/var/lib/postgresql/data
     environment:
-      POSTGRES_PASSWORD: <%= ENV['MONEY_SLEUTH_DATABASE_PASSWORD'] %>
+      POSTGRES_PASSWORD: $MONEY_SLEUTH_DATABASE_PASSWORD
     ports:
       - "5433:5432"
     networks:

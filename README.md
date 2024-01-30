@@ -16,14 +16,15 @@ A simple tool for managing income, expenses & balances. Includes customizable su
    `docker-compose build`
 
 3. Start the application
-   `docker-compose up`
+   `MONEY_SLEUTH_DATABASE_PASSWORD=password docker-compose up`
 
 You can now visit the site with the URL http://localhost:3000
 
-4. To run migrations or rake commands
+4. To setup DB and run any other commands.
    ```
    docker exec -it money_sleuth-web-1 /bin/bash
-   rake db:migrate
+   bin/rails db:setup
+   yarn install
    ```
 
 ### Testing
