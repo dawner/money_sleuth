@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_26_987204) do
+ActiveRecord::Schema[7.0].define(version: 2024_02_18_003416) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -21,6 +21,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_26_987204) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "active", default: true
+    t.text "headers", default: [], array: true
+    t.boolean "headers_in_file", default: true
+    t.string "date_format", default: "%m/%d/%Y"
+    t.boolean "expenses_negative", default: true
     t.index ["institution_id"], name: "index_accounts_on_institution_id"
   end
 
@@ -48,10 +52,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_26_987204) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "currency"
-    t.text "headers", default: [], array: true
-    t.boolean "headers_in_file", default: true
-    t.string "date_format", default: "%m/%d/%Y"
-    t.boolean "expenses_negative", default: true
     t.index ["slug"], name: "index_institutions_on_slug", unique: true
   end
 

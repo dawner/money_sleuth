@@ -5,7 +5,7 @@ RSpec.describe "/institutions", type: :request do
 
   let(:institution) { create(:institution) }
 
-  let(:valid_attributes) {{ name: 'Kiwibank', slug: 'kiwibank', headers_in_file: true, date_format: '%m/%d/%Y', expenses_negative: true, headers: Institution::REQUIRED_HEADERS }}
+  let(:valid_attributes) {{ name: 'Kiwibank', slug: 'kiwibank'}}
   let(:invalid_attributes) { { name: '' } }
 
   describe "GET /index" do

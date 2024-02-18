@@ -14,7 +14,7 @@ class InstitutionsController < ApplicationController
 
   # GET /institutions/new
   def new
-    @institution = Institution.new(headers: Institution::REQUIRED_HEADERS)
+    @institution = Institution.new
   end
 
   # GET /institutions/1/edit
@@ -69,6 +69,6 @@ class InstitutionsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def institution_params
-      params.require(:institution).permit(:name, :slug, :headers_in_file, :date_format, :expenses_negative, headers: [])
+      params.require(:institution).permit(:name, :slug)
     end
 end

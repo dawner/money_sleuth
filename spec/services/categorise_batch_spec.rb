@@ -4,9 +4,8 @@ RSpec.describe CategoriseBatch, type: :interactor do
   subject { described_class.call(transaction_batch: transaction_batch) }
 
   let(:transaction_batch) { create(:transaction_batch, file: file, account: account) }
-  let(:account){ create(:account, institution: institution) }
-  let(:institution) { create(:institution, headers: headers, expenses_negative: expenses_negative) }
-  let(:headers) { Institution::REQUIRED_HEADERS }
+  let(:account){ create(:account, headers: headers, expenses_negative: expenses_negative) }
+  let(:headers) { Account::REQUIRED_HEADERS }
   let(:expenses_negative) { true }
   let(:file) { Rack::Test::UploadedFile.new(Rails.root.join("spec/files/#{file_name}")) }
   let(:file_name) { 'example_bank_file.csv' }
