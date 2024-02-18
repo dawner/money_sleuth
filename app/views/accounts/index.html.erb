@@ -13,7 +13,6 @@
         <th>Active</th>
         <th>Headers</th>
         <th>Headers in file</th>
-        <th>Negative expenses</th>
         <th colspan="2"></th>
       </tr>
     </thead>
@@ -32,13 +31,6 @@
           <td><%= account.headers %></td>
           <td>
             <% if account.headers_in_file %>
-              <div class="icon has-text-success"><i class="fas fa-square-check"></i></div>
-            <% else %>
-              <div class="icon has-text-danger"><i class="fas fa-square-xmark"></i></div>
-            <% end %>
-          </td>
-          <td>
-            <% if account.expenses_negative %>
               <div class="icon has-text-success"><i class="fas fa-square-check"></i></div>
             <% else %>
               <div class="icon has-text-danger"><i class="fas fa-square-xmark"></i></div>

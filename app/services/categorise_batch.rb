@@ -42,13 +42,13 @@ class CategoriseBatch
     amount = parse_amount(line[:value], account)
     return amount if amount && amount.nonzero?
 
-    parse_amount(line[:expense_value], account)
+    parse_amount(line[:expense_value], account) * -1 if line[:expense_value]
   end
 
   def parse_amount(raw_value, account)
     # Strip any $ signs and commas so we can convert to float
     cleaned_value = raw_value.is_a?(String) ? raw_value.gsub(/\$|,/, '') : raw_value
-    cleaned_value && (cleaned_value.to_f * (account.expenses_negative ? 1 : -1))
+    cleaned_value && cleaned_value.to_f
   end
 
   def process_line!(line, amount, transaction_batch, account)

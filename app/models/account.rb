@@ -11,11 +11,15 @@ class Account < ApplicationRecord
   scope :active, -> { where(active: true) }
 
   LIQUID_TYPES = ['bank', 'credit_card']
-  REQUIRED_HEADERS = ['posted_on', 'description', 'value']
+  DEFAULT_HEADERS = ['posted_on', 'description', 'value']
 
   def includes_required_headers
-    unless (REQUIRED_HEADERS-headers).empty?
-      errors.add(:headers, "must contain: #{REQUIRED_HEADERS}")
+    unless (['posted_on', 'description']-headers).empty?
+      errors.add(:headers, "must contain: 'posted_on', 'description' and 'value' or 'expense_value'")
+    end
+
+    unless headers.include?('value') || headers.include?('expense_value')
+      errors.add(:headers, "must contain either value or expense_value")
     end
   end
 

@@ -15,7 +15,7 @@ class AccountsController < ApplicationController
 
   # GET /accounts/new
   def new
-    @account = Account.new(headers: Account::REQUIRED_HEADERS)
+    @account = Account.new(headers: Account::DEFAULT_HEADERS)
   end
 
   # GET /accounts/1/edit
@@ -68,6 +68,6 @@ class AccountsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def account_params
-      params.require(:account).permit(:name, :account_type, :institution_id, :active, :headers_in_file, :date_format, :expenses_negative, headers: [])
+      params.require(:account).permit(:name, :account_type, :institution_id, :active, :headers_in_file, :date_format, headers: [])
     end
 end
