@@ -36,7 +36,59 @@
     <%= form.collection_select :institution_id, Institution.all, :id, :name %>
   </div>
 
+
+  <div class="field">
+    <%= form.label :headers %>
+    <input name="headers-tags" value=<%= account.headers.join(',') %>>
+    <p class="help has-text-grey">
+      Input headers in order they appear in CSV headers.<br>
+      - Must contain headers: <%= Account::DEFAULT_HEADERS.join(', ')  %> (and/or 'expense_value')<br>
+      - For CSV formats with 2 columns with $ values use "value" for credits (income) and "expense_value" keyword for debits (expenses)<br>
+      - For CSVs that have 1 value column but show expenses as positive use "expense_value" instead of "value" (credit card statements sometimes do this)
+    </p>
+  </div>
+
+  <div class="field">
+    <%= form.label :headers_in_file %>
+
+    <%= form.label :headers_in_file_true do %>
+      <%= form.radio_button :headers_in_file, true %>
+      True
+    <% end %>
+
+    <%= form.label :headers_in_file_false do %>
+        <%= form.radio_button :headers_in_file, false %>
+        False
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= form.label :date_format %>
+    <%= form.text_field :date_format %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>
 <% end %>
+
+<script>
+  var tagInput = document.querySelector('input[name="headers-tags"]');
+
+  var tagify = new Tagify(tagInput, {
+    originalInputValueFormat: valuesArr => valuesArr.map(item => item.value).join(',')
+  })
+
+  // Transform Tagify input format into an array input fields
+  var form = tagInput.form
+  form.addEventListener('submit', (event) => {
+    var tags = tagInput.value.split(',').map((val) => {
+      var i = document.createElement("input");
+      i.setAttribute('name', 'account[headers][]');
+      i.setAttribute('value', val.toLowerCase());
+      i.setAttribute('hidden', true);
+      form.appendChild(i)
+    });
+    tagInput.parentNode.removeChild(tagInput);
+  });
+</script>

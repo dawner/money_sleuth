@@ -26,6 +26,21 @@
   <%= @account.institution.name %>
 </p>
 
+<p>
+  <strong>Headers:</strong>
+  <%= @account.headers %>
+</p>
+
+<p>
+  <strong>Headers included in file:</strong>
+  <%= @account.headers_in_file %>
+</p>
+
+<p>
+  <strong>Date format:</strong>
+  <%= @account.date_format %>
+</p>
+
 <canvas id="balances" width="200px" height="100px" data-labels="<%= @balance_labels %>" data-data="<%= @balance_values %>" ></canvas>
 
 <%= link_to 'Edit', edit_account_path(@account) %>

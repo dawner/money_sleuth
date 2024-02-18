@@ -5,7 +5,8 @@ RSpec.describe "/accounts", type: :request do
 
   let!(:account) { create(:account, institution: institution) }
   let(:institution) { create(:institution) }
-  let(:valid_attributes) {{ name: 'Account Name', account_type: :bank, institution_id: institution.id, active: true }}
+
+  let(:valid_attributes) {{ name: 'Account Name', account_type: :bank, institution_id: institution.id, active: true, headers_in_file: true, date_format: '%m/%d/%Y', headers: Account::DEFAULT_HEADERS }}
   let(:invalid_attributes) {{name: '', }}
 
   describe "GET /index" do

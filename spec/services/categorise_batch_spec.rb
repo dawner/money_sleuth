@@ -4,10 +4,8 @@ RSpec.describe CategoriseBatch, type: :interactor do
   subject { described_class.call(transaction_batch: transaction_batch) }
 
   let(:transaction_batch) { create(:transaction_batch, file: file, account: account) }
-  let(:account){ create(:account, institution: institution) }
-  let(:institution) { create(:institution, headers: headers, expenses_negative: expenses_negative) }
-  let(:headers) { Institution::REQUIRED_HEADERS }
-  let(:expenses_negative) { true }
+  let(:account){ create(:account, headers: headers) }
+  let(:headers) { Account::DEFAULT_HEADERS }
   let(:file) { Rack::Test::UploadedFile.new(Rails.root.join("spec/files/#{file_name}")) }
   let(:file_name) { 'example_bank_file.csv' }
 
@@ -44,10 +42,9 @@ RSpec.describe CategoriseBatch, type: :interactor do
           end
         end
 
-        context 'for expenses as credits' do
+        context 'for file with debits and credits' do
           let(:file_name) { 'example_bank_file_debit_credit_columns.csv' }
-          let(:expenses_negative) { false }
-          let(:headers){ ['posted_on', 'description', 'value', 'expense_value'] }
+          let(:headers){ ['posted_on', 'description', 'expense_value', 'value'] }
 
           it 'categorises the batch to matching categories' do
             expect(subject).to be_a_success
@@ -62,9 +59,9 @@ RSpec.describe CategoriseBatch, type: :interactor do
           end
         end
 
-        context 'for file with debits and credits' do
+        context 'for expenses as credits' do
           let(:file_name) { 'example_bank_file_positive_value_expenses.csv' }
-          let(:expenses_negative) { false } # Assume expenses are never negative for debit/credit
+          let(:headers){ ['posted_on', 'description', 'expense_value'] }
 
           it 'categorises the batch to matching categories' do
             expect(subject).to be_a_success

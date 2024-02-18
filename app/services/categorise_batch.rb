@@ -3,61 +3,63 @@ class CategoriseBatch
 
   def call
     transaction_batch = context.transaction_batch
-    institution = transaction_batch.account.institution
+    account = transaction_batch.account
 
     if transaction_batch.valid?
       TransactionBatch.transaction do
-        csv = read_csv(institution, transaction_batch.file.current_path)
+        csv = read_csv(account, transaction_batch.file.current_path)
         csv.each do |line|
-          amount = get_amount(line, institution)
+          amount = get_amount(line, account)
           next unless amount && amount.nonzero? # Remove transactions without a dollar value
 
-          process_line!(line, amount, transaction_batch, institution)
+          process_line!(line, amount, transaction_batch, account)
         end
         update_batch_period!(transaction_batch)
       end
     else
       context.fail!({errors: transaction_batch.errors})
     end
+  rescue Date::Error => e
+    context.fail!({errors: "Invalid date: check the account date format matches #{account.date_format}?"})
   end
 
   private
 
-  def read_csv(institution, file_path)
-    institution_format_options = {
+  def read_csv(account, file_path)
+    format_options = {
       remove_unmapped_keys: true,
-      headers_in_file: institution.headers_in_file,
+      headers_in_file: account.headers_in_file,
       force_utf8: true,
-      user_provided_headers: institution.headers
+      user_provided_headers: account.headers
     }
 
       file = File.open(file_path, "r:bom|utf-8")
-      csv = SmarterCSV.process(file, institution_format_options)
+      csv = SmarterCSV.process(file, format_options)
       file.close
 
     csv
   end
 
-  def get_amount(line, institution)
-    amount = parse_amount(line[:value], institution)
+  def get_amount(line, account)
+    amount = parse_amount(line[:value], account)
     return amount if amount && amount.nonzero?
 
-    parse_amount(line[:expense_value], institution)
+    parse_amount(line[:expense_value], account) * -1 if line[:expense_value]
   end
 
-  def parse_amount(raw_value, institution)
+  def parse_amount(raw_value, account)
     # Strip any $ signs and commas so we can convert to float
     cleaned_value = raw_value.is_a?(String) ? raw_value.gsub(/\$|,/, '') : raw_value
-    cleaned_value && (cleaned_value.to_f * (institution.expenses_negative ? 1 : -1))
+    cleaned_value && cleaned_value.to_f
   end
 
-  def process_line!(line, amount, transaction_batch, institution)
+  def process_line!(line, amount, transaction_batch, account)
     # Find first category which has keywords matching the line description
     # TODO definitely need to make this smarter
     transaction = transaction_batch.transactions.new(line.slice(:posted_on, :description, :value))
     best_category_match = Category.where('keywords && array[?]', transaction.description.downcase.split).last
     transaction.category =  best_category_match || Category.default
-    transaction.posted_on = DateTime.strptime(line[:posted_on], institution.date_format)
+    transaction.posted_on = DateTime.strptime(line[:posted_on], account.date_format)
     transaction.value = amount
     transaction.save!
   end
