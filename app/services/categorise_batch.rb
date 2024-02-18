@@ -19,6 +19,8 @@ class CategoriseBatch
     else
       context.fail!({errors: transaction_batch.errors})
     end
+  rescue Date::Error => e
+    context.fail!({errors: "Invalid date: check the account date format matches #{account.date_format}?"})
   end
 
   private

@@ -30,6 +30,7 @@ class TransactionBatchesController < ApplicationController
         format.html { redirect_to @transaction_batch, notice: 'Transaction batch was successfully created.' }
         format.json { render :show, status: :created, location: @transaction_batch }
       else
+        @transaction_batch.errors.add(:file, result.errors) if result
         format.html { render :new }
         format.json { render json: result.errors, status: :unprocessable_entity }
       end
