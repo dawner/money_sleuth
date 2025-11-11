@@ -1,4 +1,4 @@
-FROM ruby:3.1.2
+FROM ruby:3.3.6
 
 # Add node & yarn for webpacker
 RUN curl https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
@@ -19,4 +19,4 @@ ENTRYPOINT ["entrypoint.sh"]
 EXPOSE 3000
 
 # Configure the main process to run when running the image
-CMD ["rails", "server", "-b", "0.0.0.0"]
+CMD ["rails", "server"]
